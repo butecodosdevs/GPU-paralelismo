@@ -14,7 +14,6 @@ set(CMAKE_CXX_STANDARD     17)
 # pasta nova.
 set(EXECUTABLE_OUTPUT_PATH "../build")
 
-
 # O CMake te deixa gerar construir um projeto para diferentes plataformas.
 if(WIN32)
     set(THIRD_PARTY_LIBRARIES mingw32 SDL2main SDL2 glew32 opengl32)
