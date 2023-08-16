@@ -19,6 +19,8 @@ E é necessário baixar o ![CMake](https://cmake.org/download/).
 Para compilar no Kernel do Linux, pode executar os mesmo comandos portanto que tenha baixado todas as depêndencias.  
 
 ```bat
+:: demo/
+
 :: O CMake é uma linguagem intermediaria que gera makefiles para compilar cada arquivo
 :: do C++.
 
