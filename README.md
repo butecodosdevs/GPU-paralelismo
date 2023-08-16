@@ -13,7 +13,11 @@ mas você precisa baixar o `libsdl2-dev` e o `libglew-dev` com o gerenciador de 
 No caso do Windows, foi disponibilizado as bibliotecas nativas prontas para serem copiadas  
 e no caminho de bibliotecas do toolchain (compilador).
 
-O compilador usado foi o GCC, no Windows ![MinGW-64w](https://www.mingw-w64.org/downloads/).
+O compilador usado foi o GCC, no Windows ![MinGW-64w](https://www.mingw-w64.org/downloads/).  
+E é necessário baixar o ![CMake](https://cmake.org/download/), recomendo olhar os arquivos  
+de ![build do CMake](dmo/CMakeLists.txt) e ![os arquivos de script de build.](demo/compilar-win32.bat)
+
+Para compilar no Kernel do Linux, pode executar os mesmo comandos portanto que tenha baixado todas as depêndencias.  
 
 🐈‍⬛ -> 🐈 -> 🐈‍⬛ -> 🐈 -> 🐈‍⬛
 
