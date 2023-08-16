@@ -4,8 +4,7 @@ The aulas of gatinhos ao mesmo tempo
 ![Foi escrito um programa em C++ que implementa uma pequena demonstração do uso da GPU com OpenGL](demo/),  
 em uma janela do ![SDL2](https://www.libsdl.org/).  
 A biblioteca usada para obter as funções de extensão novas do OpenGL 4 é o ![GLEW](https://glew.sourceforge.net/).  
-A biblioteca de matemática usada para fazer operações matemática de álgebra linear  
-é o ![GLM](https://github.com/g-truc/glm).
+A biblioteca de matemática usada para fazer operações matemática de álgebra linear é o ![GLM](https://github.com/g-truc/glm).
 
 As DLLs das biblioteca são 64, o mesmo programa pode ser compilado no Linux,  
 mas você precisa baixar o libsdl2 dev e o libglew dev com o gerenciador de pacotes.
