@@ -48,7 +48,7 @@ chorume::result chorume::create_graphics_pipeline_program(chorume::graphics_pipe
             info_log.resize(out);
             glGetShaderInfoLog(shader, out, nullptr, info_log.data());
 
-            chorume::log() << "Failed to compile shader '" << shading_source.p_file_path << "`!" << '\n' << info_log;
+            chorume::log() << "Shader '" << shading_source.p_file_path << "' não conseguiu ser compilada 😿!" << '\n' << info_log;
             issue = chorume::result::failed;
 
             break;
@@ -56,6 +56,8 @@ chorume::result chorume::create_graphics_pipeline_program(chorume::graphics_pipe
 
         jit_compiled_shader_list.emplace_back() = shader;
         glAttachShader(p_pipeline_program->program, shader);
+
+        chorume::log() << "Shader '" << shading_source.p_file_path << "' compilada 😸!";
     }
 
     if (jit_compiled_shader_list.size() == shaders.size()) {
@@ -71,7 +73,7 @@ chorume::result chorume::create_graphics_pipeline_program(chorume::graphics_pipe
             info_log.resize(out);
             glGetProgramInfoLog(p_pipeline_program->program, out, nullptr, info_log.data());
 
-            chorume::log() << "Failed to link program " << '\n' << info_log;
+            chorume::log() << "Programa não conseguiu linkar as shaders ao programa 😿! " << '\n' << info_log;
             issue = chorume::result::failed;
         }
     }

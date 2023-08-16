@@ -1,7 +1,7 @@
 #include "graphics/graphics_pipeline_program.hpp"
 
 int32_t main(int32_t, char**) {
-    std::cout << "Preparando o contexto do OpenGL." << std::endl;
+    chorume::log() << "Preparando o contexto do OpenGL.";
 
     SDL_Init(SDL_INIT_VIDEO);
 
@@ -16,10 +16,10 @@ int32_t main(int32_t, char**) {
                                                          chorume::application.extent.w, chorume::application.extent.h,
                                                          SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL);
 
-    std::cout << "Janela criada." << std::endl;
+    chorume::log() << "Janela criada.";
 
     chorume::application.sdl_gl_context = SDL_GL_CreateContext(chorume::application.p_sdl_window);
-    std::cout << "Contexto acelerado por GPU com a API OpenGL criada!" << std::endl;
+    chorume::log() << "Contexto acelerado por GPU com a API OpenGL criada!";
 
     glewExperimental = GL_TRUE;
     glewInit();
@@ -35,6 +35,13 @@ int32_t main(int32_t, char**) {
         while (SDL_PollEvent(&sdl_event)) {
             if (sdl_event.type == SDL_QUIT) {
                 chorume::application.running = false;
+            }
+
+            if (sdl_event.type == SDL_WINDOWEVENT && sdl_event.window.event == SDL_WINDOWEVENT_SIZE_CHANGED) {
+                chorume::application.extent.w = sdl_event.window.data1;
+                chorume::application.extent.h = sdl_event.window.data2;
+
+                chorume::log() << "Janela redimensionada " << sdl_event.window.data1 << 'x' << sdl_event.window.data2;
             }
         }
 
