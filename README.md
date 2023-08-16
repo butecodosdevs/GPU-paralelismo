@@ -14,10 +14,26 @@ No caso do Windows, foi disponibilizado as bibliotecas nativas prontas para sere
 e no caminho de bibliotecas do toolchain (compilador).
 
 O compilador usado foi o GCC, no Windows ![MinGW-64w](https://www.mingw-w64.org/downloads/).  
-E é necessário baixar o ![CMake](https://cmake.org/download/), recomendo olhar os arquivos  
-de ![build do CMake](demo/CMakeLists.txt) e ![os arquivos de script de build.](demo/compilar-win32.bat)
+E é necessário baixar o ![CMake](https://cmake.org/download/).
 
 Para compilar no Kernel do Linux, pode executar os mesmo comandos portanto que tenha baixado todas as depêndencias.  
+
+```bat
+:: O CMake é uma linguagem intermediaria que gera makefiles para compilar cada arquivo
+:: do C++.
+
+:: S é de SOURCE, o . atual diz a pasta que o CMakeLists.txt está.
+:: B é de BUILD, e diz aonde queremos que o CMake gere arquivos makefile.
+:: G significa qual tipo de makefile para o toolchain (compilador),
+:: nesse caso é o ninja, mas poderiamos gerar makefiles com "MinGW Makefiles",
+:: ou "Unix Makefiles" para sistema operacionais Linux.
+
+cmake -S . -B ./cmake-build-debug -G "Ninja"
+
+:: --build é um comando para pegar tudo que foi construido pelo comando acima,
+:: e compilar o programa.
+cmake --build ./cmake-build-debug
+```
 
 🐈‍⬛ -> 🐈 -> 🐈‍⬛ -> 🐈 -> 🐈‍⬛
 
