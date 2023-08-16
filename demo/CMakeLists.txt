@@ -29,6 +29,11 @@ file(GLOB_RECURSE SRC_FILES "src/*.cpp")
 # adicionando os arquivos de cima.
 add_executable(chorume ${SRC_FILES})
 
+# Para ser mais divertido programar,
+# vamos adicionar a source como include
+# nos argumentos do compilador.
+include_directories(src)
+
 # Target link libraries é para embutir as bibliotecas
 # dentro do executavel.
 
