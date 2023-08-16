@@ -15,7 +15,7 @@ e no caminho de bibliotecas do toolchain (compilador).
 
 O compilador usado foi o GCC, no Windows ![MinGW-64w](https://www.mingw-w64.org/downloads/).  
 E é necessário baixar o ![CMake](https://cmake.org/download/), recomendo olhar os arquivos  
-de ![build do CMake](dmo/CMakeLists.txt) e ![os arquivos de script de build.](demo/compilar-win32.bat)
+de ![build do CMake](demo/CMakeLists.txt) e ![os arquivos de script de build.](demo/compilar-win32.bat)
 
 Para compilar no Kernel do Linux, pode executar os mesmo comandos portanto que tenha baixado todas as depêndencias.  
 
