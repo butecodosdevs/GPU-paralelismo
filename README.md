@@ -11,7 +11,7 @@ As DLLs das biblioteca são 64, o mesmo programa pode ser compilado no Linux,
 mas você precisa baixar o `libsdl2-dev` e o `libglew-dev` com o gerenciador de pacotes.
 
 No caso do Windows, foi disponibilizado as bibliotecas nativas prontas para serem copiadas  
-e no caminho de bibliotecas do toolchain (compilador).
+no caminho de bibliotecas do toolchain (compilador).
 
 O compilador usado foi o GCC, no Windows [MinGW-64w](https://www.mingw-w64.org/downloads/).  
 E é necessário baixar o [CMake](https://cmake.org/download/).
