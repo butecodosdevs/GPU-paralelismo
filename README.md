@@ -6,8 +6,13 @@ em uma janela do ![SDL2](https://www.libsdl.org/). A biblioteca usada para obter
 A biblioteca de matemática usada para fazer operações matemática de álgebra linear  
 é o ![GLM](https://github.com/g-truc/glm).
 
-As DLLs da biblioteca são 64, o mesmo programa pode ser compilado no Linux,  
+As DLLs das biblioteca são 64, o mesmo programa pode ser compilado no Linux,  
 mas você precisa baixar o libsdl2 dev e o libglew dev com o gerenciador de pacotes.
+
+No caso do Windows, foi disponibilizado as bibliotecas nativas prontas para serem copiadas  
+e no caminho de bibliotecas do toolchain (compilador).
+
+O compilador usado foi o GCC, no Windows MinGW-64w.
 
 🐈‍⬛ -> 🐈 -> 🐈‍⬛ -> 🐈 -> 🐈‍⬛
 
