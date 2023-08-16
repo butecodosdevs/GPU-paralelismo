@@ -24,10 +24,9 @@ Devem ser baixadas `libsdl2-dev` e o `libglew-dev` com o gerenciador de pacotes 
 
 :: S é de SOURCE, o . atual diz a pasta que o CMakeLists.txt está.
 :: B é de BUILD, e diz aonde queremos que o CMake gere arquivos makefile.
-:: G significa qual tipo de makefile para o toolchain (compilador),
+:: G significa qual tipo de makefile para o toolchain (compilador) gerar,
 :: poderiamos gerar makefiles com "MinGW Makefiles", ou
 :: "Unix Makefiles" para sistema operacionais Linux.
-
 
 :: Se você estiver no Linux:
 cmake -S . -B ./cmake-build-debug -G "Unix Makefiles"
