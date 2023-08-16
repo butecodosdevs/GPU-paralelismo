@@ -2,6 +2,8 @@
 #define CHORUME_PLATFORM_H
 
 #include <iostream>
+#include <ostream>
+#include <sstream>
 #include <glm/glm.hpp>
 
 #if defined(WIN32)
@@ -35,6 +37,26 @@ namespace chorume {
         extent2d      extent {};
         SDL_GLContext sdl_gl_context {};
     } application;
+
+    struct log {
+    protected:
+        std::ostringstream buffer {};
+    public:    
+        explicit log() {
+            this->buffer << "[CHORUME] ";
+        }
+    
+        ~log() {
+            this->buffer << '\n';
+            std::cout << this->buffer.str();
+        }
+    
+        template<typename t>
+        log &operator<<(const t &value) {
+            this->buffer << value;
+            return *this;
+        }
+    };
 }
 
 #endif

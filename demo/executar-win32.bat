@@ -1,1 +1,1 @@
-compilar-win32 && cd ./build && start chorume.exe
+compilar-win32 && cd ./build && start chorume.exe && cd ../

@@ -18,11 +18,11 @@ int32_t main(int32_t, char**) {
 
     std::cout << "Janela criada." << std::endl;
 
-    glewExperimental = GL_TRUE;
-    glewInit();
-
     chorume::application.sdl_gl_context = SDL_GL_CreateContext(chorume::application.p_sdl_window);
     std::cout << "Contexto acelerado por GPU com a API OpenGL criada!" << std::endl;
+
+    glewExperimental = GL_TRUE;
+    glewInit();
 
     chorume::graphics_pipeline_program *p_overlay_program = new chorume::graphics_pipeline_program();
     chorume::create_graphics_pipeline_program(p_overlay_program, {
