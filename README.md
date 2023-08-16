@@ -48,10 +48,17 @@ cmake --build ./cmake-build-debug
 
 ![Sumario](sumario/sumario.md) 
 
-![Apresentação e introdução](1/1-.md)  
+![Apresentação e introdução](1/1-.md) 
+- Resumo sobre a GPU e a sua importância de um modo geral.
+
 ![Qual a base de conhecimento e a preparação necessária para iniciar nessa área](2/2-.md)  
+- Informação sobre o conhecimento necessário para prosseguir com essa carreira.
+
 ![Quais os diferentes campos e sua situação no mercado exterior](3/3-.md)  
+- Situação no mercado atual e como é o trabalho.  
+
 ![Situação do Brasil e o campo graphics programming](4/4-.md)  
+- Situação no cenário Brasileiro e uma critíca.
 
 ---
 
