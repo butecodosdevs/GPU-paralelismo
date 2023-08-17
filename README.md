@@ -55,7 +55,7 @@ cmake --build ./cmake-build-debug
 - Situação no mercado atual e como é o trabalho.  
 
 ![Situação do Brasil e o campo graphics programming](4/4-.md)  
-- Situação no cenário Brasileiro e uma critíca.
+- Situação no cenário Brasileiro e uma crítica.
 
 ---
 
