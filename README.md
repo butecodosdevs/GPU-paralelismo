@@ -13,7 +13,7 @@ A biblioteca de matemática usada para fazer operações matemática de álgebra
 No caso do Windows, foi disponibilizado as bibliotecas nativas prontas para serem copiadas  
 no caminho de bibliotecas do toolchain (compilador).  As DLLs das biblioteca são 64.
 
-Para compilar no Kernel do Linux, são os mesmo comandos portanto que tenha baixado todas as depêndencias.  
+Para compilar no Linux, são os mesmo comandos portanto que tenha baixado todas as depêndencias.  
 Devem ser baixadas `libsdl2-dev` e o `libglew-dev` com o gerenciador de pacotes do seu Linux.
 
 ```bat
@@ -55,7 +55,7 @@ cmake --build ./cmake-build-debug
 - Situação no mercado atual e como é o trabalho.  
 
 ![Situação do Brasil e o campo graphics programming](4/4-.md)  
-- Situação no cenário Brasileiro e uma critíca.
+- Situação no cenário Brasileiro e uma crítica.
 
 ---
 
