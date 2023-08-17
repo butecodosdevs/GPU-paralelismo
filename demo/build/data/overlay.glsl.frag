@@ -8,5 +8,5 @@ in vec4 vRect;
 uniform vec4 uColor;
 
 void main() {
-    vFragColor = uColor;
+    vFragColor = vec4(noise3(uColor.xyz * 0.5f / gl_FragCoord.yxy / uColor.xyz * cos(gl_FragCoord.xyx / vRect.xyw)), 1.0f);
 }

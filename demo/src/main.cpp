@@ -39,6 +39,8 @@ int32_t main(int32_t, char**) {
     chorume::graphics_immediate_shape immediate_shape {};
     immediate_shape.set_pipeline_program(p_overlay_program->program);
 
+    float lerp {};
+
     SDL_Event sdl_event {};
     while (chorume::application.running) {
         while (SDL_PollEvent(&sdl_event)) {
@@ -65,8 +67,10 @@ int32_t main(int32_t, char**) {
         glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+        lerp += 0.03f;
+
         immediate_shape.invoke();
-        immediate_shape.draw({20.0f, 20.0f, 200.0f, 200.0f}, {0.0f, 0.3435f, 0.9894543f, 1.0f});
+        immediate_shape.draw({20.0f, 20.0f, 900.0f, 900.0f}, {0.0f, sin(lerp), 0.9894543f, 1.0f});
         immediate_shape.revoke();
 
         SDL_GL_SwapWindow(chorume::application.p_sdl_window);
