@@ -76,6 +76,8 @@ chorume::result chorume::create_graphics_pipeline_program(chorume::graphics_pipe
             chorume::log() << "Programa não conseguiu linkar as shaders ao programa 😿! " << '\n' << info_log;
             issue = chorume::result::failed;
         }
+
+        chorume::log() << "Programa ligado na GPU 😸!";
     }
 
     for (uint32_t &shaders : jit_compiled_shader_list) {

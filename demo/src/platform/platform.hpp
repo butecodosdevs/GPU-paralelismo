@@ -29,13 +29,21 @@ namespace chorume {
         int32_t h {};
     };
 
+    struct camera {
+    public:
+        glm::mat4 mat_projection_perspective {};
+        glm::mat4 mat_projection_overlay {};
+        glm::vec3 position {};
+    };
+
     extern struct platform {
     public:
-        const char   *p_application_name {};
-        SDL_Window   *p_sdl_window {};
-        bool          running {true};
-        extent2d      extent {};
-        SDL_GLContext sdl_gl_context {};
+        const char     *p_application_name {};
+        SDL_Window     *p_sdl_window {};
+        bool            running {true};
+        extent2d        extent {};
+        SDL_GLContext   sdl_gl_context {};
+        chorume::camera camera {};
     } application;
 
     struct log {
