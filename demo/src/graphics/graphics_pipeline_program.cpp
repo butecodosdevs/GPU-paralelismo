@@ -1,6 +1,16 @@
 #include "graphics_pipeline_program.hpp"
 #include <fstream>
 
+void chorume::graphics_pipeline_program::set_uniform_mat4(std::string_view uniform_name, const float *p_value) {
+    glUniformMatrix4fv(glGetUniformLocation(this->program, uniform_name.data()), 1, GL_FALSE, p_value);
+}
+
+void chorume::graphics_pipeline_program::set_uniform_vec3(std::string_view uniform_name, const float *p_value) {
+    glUniform3f(glGetUniformLocation(this->program, uniform_name.data()), p_value[0], p_value[1], p_value[2]);
+}
+
+chorume::result set_pipeline_program_uniform_mat4(chorume::graphics_pipeline_program *p_pipeline_program, const float *p_value);
+
 chorume::result chorume::read_file_as_string(std::string_view path, std::string &file_content_as_string) {
     std::ifstream ifs(path.data());
     if (ifs.is_open()) {

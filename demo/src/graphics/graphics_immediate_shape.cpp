@@ -76,9 +76,12 @@ void chorume::graphics_immediate_shape::invoke() {
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+    this->delta += 0.016f;
+    glUniform1f(glGetUniformLocation(this->pipeline_program, "uDelta"), this->delta);
+
     glActiveTexture(GL_TEXTURE0);
     glUniformMatrix4fv(this->uniform_location_matrix_projection_id, GL_TRUE, GL_FALSE,
-                       &chorume::application.camera.mat_projection_overlay[0][0]);
+                       &chorume::application.camera.mat_ortho_view[0][0]);
 }
 
 void chorume::graphics_immediate_shape::draw(const glm::vec4 &rect, const glm::vec4 &color, uint32_t texture) {

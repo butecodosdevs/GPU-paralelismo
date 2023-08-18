@@ -15,6 +15,7 @@ namespace chorume {
         uint32_t list_buffer_id {};
         uint32_t current_texture_bound {};
         uint32_t pipeline_program {};
+        float delta {};
     public:
         void set_pipeline_program(uint32_t _pipeline_program);
         void invoke();

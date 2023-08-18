@@ -6,7 +6,12 @@ in vec2 vPos;
 in vec4 vRect;
 
 uniform vec4 uColor;
+uniform float uDelta;
+
+float rand(vec2 co) {
+    return fract(sin(dot(co, vec2(12.9898, 78.233))) * 43758.5453);
+}
 
 void main() {
-    vFragColor = vec4(noise3(uColor.xyz * 0.5f / gl_FragCoord.yxy / uColor.xyz * cos(gl_FragCoord.xyx / vRect.xyw)), 1.0f);
+    vFragColor = uColor;
 }

@@ -31,9 +31,16 @@ namespace chorume {
 
     struct camera {
     public:
-        glm::mat4 mat_projection_perspective {};
-        glm::mat4 mat_projection_overlay {};
+        glm::mat4 mat_look_at_view {};
+        glm::mat4 mat_ortho_view {};
+        glm::mat4 mat_perspective {};
+        glm::mat4 mat_projection {};
         glm::vec3 position {};
+
+        float sensitivity {0.2f};
+        float yaw {};
+        float pitch {};
+        float fov {90.0f};
     };
 
     extern struct platform {
@@ -44,6 +51,10 @@ namespace chorume {
         extent2d        extent {};
         SDL_GLContext   sdl_gl_context {};
         chorume::camera camera {};
+        float           gravity {0.9f};
+        // o runtime nao se importa e nem calcula delta time,
+        // pre-supondo que isso ta rodando sempre a 60fps
+        float           dt {0.016f};
     } application;
 
     struct log {

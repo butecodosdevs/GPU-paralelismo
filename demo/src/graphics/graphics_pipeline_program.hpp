@@ -9,8 +9,8 @@ namespace chorume {
     public:
         uint32_t program {};
     public:
-        void invoke();
-        void revoke();
+        void set_uniform_mat4(std::string_view uniform_name, const float *p_value);
+        void set_uniform_vec3(std::string_view uniform_name, const float *p_value);
     };
 
     struct graphics_shading_source {
