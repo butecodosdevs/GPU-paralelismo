@@ -4,6 +4,55 @@
 #include "scene/world_object_cloth.hpp"
 #include <glm/gtc/matrix_transform.hpp>
 
+void update_mouse_editor_camera(SDL_Event &sdl_event) {
+    glm::vec3 move_direction {};
+    float motion_rel[2] {};
+
+    switch (sdl_event.type) {
+    case SDL_MOUSEBUTTONDOWN:
+        chorume::application.camera.locked = sdl_event.button.button;
+        chorume::application.camera.moved = sdl_event.button.button;
+        break;
+
+    case SDL_MOUSEBUTTONUP:
+        chorume::application.camera.locked = chorume::application.camera.locked == sdl_event.button.button ? -1 : chorume::application.camera.locked;
+        chorume::application.camera.moved = chorume::application.camera.moved == sdl_event.button.button ? -1 : chorume::application.camera.moved;
+        break;
+
+    case SDL_MOUSEWHEEL:
+        move_direction.x = sdl_event.wheel.preciseX * 10.0f;
+        move_direction.z = sdl_event.wheel.preciseY * 10.0f;
+        break;
+
+    case SDL_MOUSEMOTION:
+        if (chorume::application.camera.locked == 1) {
+            motion_rel[0] = sdl_event.motion.xrel;
+            motion_rel[1] = sdl_event.motion.yrel;
+        }
+
+        if (chorume::application.camera.moved == 3) {
+            move_direction.x = sdl_event.motion.xrel;
+            move_direction.y = -sdl_event.motion.yrel;
+        }
+
+        break;
+    }
+
+    float speed {0.02875f};
+    float yaw {glm::radians(chorume::application.camera.yaw)};
+    float pitch {glm::radians(chorume::application.camera.pitch)};
+
+    glm::vec3 rotation {glm::cos(yaw), 0.0f, glm::sin(yaw)};
+    glm::vec3 velocity {
+        move_direction.z * speed * rotation.x + move_direction.x * speed * rotation.z,
+        move_direction.y * speed * pitch,
+        move_direction.z * speed * rotation.z - move_direction.x * speed * rotation.x
+    };
+
+    chorume::application.camera.position += velocity;
+    chorume::linear_algebra_calculate_camera_look(sdl_event.motion.x, sdl_event.motion.y, motion_rel[0], motion_rel[1]);
+}
+
 int32_t main(int32_t, char**) {
     chorume::log() << "Preparando o contexto do OpenGL.";
 
@@ -50,21 +99,21 @@ int32_t main(int32_t, char**) {
     chorume::world_object_cloth *p_world_obj_coth = new chorume::world_object_cloth();
     p_world_obj_coth->create();
     p_world_obj_coth->position.y -= 3.0f;
-    p_world_obj_coth->scale = glm::vec3(4.0f, 1.0f, 4.0f);
+    p_world_obj_coth->scale = glm::vec3(2.0f, 1.0f, 2.0f);
 
     chorume::camera &camera {chorume::application.camera};
+    bool mouse_locked {};
+
     SDL_Event sdl_event {};
 
     glDisable(GL_CULL_FACE);
 
     while (chorume::application.running) {
         while (SDL_PollEvent(&sdl_event)) {
+            update_mouse_editor_camera(sdl_event);
+
             if (sdl_event.type == SDL_QUIT) {
                 chorume::application.running = false;
-            }
-
-            if (sdl_event.type == SDL_MOUSEMOTION) {
-                chorume::linear_algebra_calculate_camera_look(sdl_event.motion.x, sdl_event.motion.y, sdl_event.motion.xrel, sdl_event.motion.yrel);
             }
 
             if (sdl_event.type == SDL_WINDOWEVENT && sdl_event.window.event == SDL_WINDOWEVENT_SIZE_CHANGED) {

@@ -26,5 +26,5 @@ vec3 applyDiffuseLighting() {
 }
 
 void main() {
-    vFragColor = vec4(applyDiffuseLighting(), 1.0f);
+    vFragColor = vec4(1.0f);
 }

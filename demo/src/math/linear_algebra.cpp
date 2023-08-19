@@ -8,6 +8,14 @@ void chorume::linear_algebra_calculate_camera_look(float m_x, float m_y, float r
     float yaw {glm::radians(chorume::application.camera.yaw)};
     float pitch {glm::radians(chorume::application.camera.pitch)};
 
+    if (pitch > 89.0f) {
+        pitch = 89.0f;
+    }
+
+    if (pitch < -89.0f) {
+        pitch = -89.0f;
+    }
+
     glm::vec3 direction {
         glm::cos(yaw) * glm::cos(pitch),
         glm::sin(pitch),

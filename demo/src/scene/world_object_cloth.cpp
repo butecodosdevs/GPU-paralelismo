@@ -17,11 +17,11 @@ void chorume::world_object_cloth::update_constraint() {
         delta_diff = (delta_length - constraint.rest_length) / delta_length;
 
         if (!point_a.is_fixed) {
-            point_a.position += delta * 0.5f * delta_diff;
+            point_a.position += delta * 0.5f * delta_diff * chorume::application.dt;
         }
 
         if (point_b.is_fixed) {
-            point_b.position -= delta * 0.5f * delta_diff;
+            point_b.position -= delta * 0.5f * delta_diff * chorume::application.dt;
         }
     }
 }
@@ -41,7 +41,7 @@ void chorume::world_object_cloth::update_verlet_integration() {
     for (uint64_t it {}; it < this->loaded_point_list.size(); it++) {
         chorume::world_object_cloth::point &point {this->loaded_point_list.at(it)};
 
-        next_pos = point.position + (point.position - point.old_position);
+        next_pos = point.position + (point.position - point.old_position) * chorume::application.dt * chorume::application.dt;
         point.old_position = point.position;
         point.position = next_pos;
 
@@ -57,11 +57,16 @@ void chorume::world_object_cloth::create() {
     }
 
     glm::vec3 point_position {};
-    chorume::world_object_cloth::constraint constraint {};
     bool should_be_a_fixed_point {};
 
-    for (int32_t x {}; x < this->plane.x - 1; x++) {
-        for (int32_t z {}; z < this->plane.z - 1; z++) {
+    uint64_t point_a_index {};
+    uint64_t point_b_index {};
+
+    chorume::world_object_cloth::constraint constraint {};
+    constraint.rest_length = 1.0f;
+
+    for (int32_t x {}; x < this->plane.x; x++) {
+        for (int32_t z {}; z < this->plane.z; z++) {
             should_be_a_fixed_point = (x == 0 || z == 0);
 
             point_position = {
@@ -70,9 +75,6 @@ void chorume::world_object_cloth::create() {
                 static_cast<float>(z) / static_cast<float>(this->plane.z)
             };
 
-            constraint.rest_length = 1.0f;
-            constraint.point[0] = this->loaded_point_list.size();            
-
             this->loaded_point_list.emplace_back() = {
                 .position = point_position,
                 .old_position = point_position,
@@ -80,21 +82,19 @@ void chorume::world_object_cloth::create() {
                 .rendering_index = this->geometry_resource_list.size()
             };
 
-            constraint.point[1] = this->loaded_point_list.size();
-            this->loaded_constraint_list.push_back(constraint);
-
             this->geometry_resource_list.emplace_back() = point_position.x;
             this->geometry_resource_list.emplace_back() = point_position.y;
             this->geometry_resource_list.emplace_back() = point_position.z;
+
+            continue;
+
+            /* Point A */
 
             point_position = {
                 static_cast<float>(x) / static_cast<float>(this->plane.x),
                 0.0f,
-                static_cast<float>(z + 1) / static_cast<float>(this->plane.z)
+                static_cast<float>(z) / static_cast<float>(this->plane.z)
             };
-
-            constraint.rest_length = 1.0f;
-            constraint.point[0] = this->loaded_point_list.size();            
 
             this->loaded_point_list.emplace_back() = {
                 .position = point_position,
@@ -103,12 +103,20 @@ void chorume::world_object_cloth::create() {
                 .rendering_index = this->geometry_resource_list.size()
             };
 
-            constraint.point[1] = this->loaded_point_list.size();
-            this->loaded_constraint_list.push_back(constraint);
-
             this->geometry_resource_list.emplace_back() = point_position.x;
             this->geometry_resource_list.emplace_back() = point_position.y;
             this->geometry_resource_list.emplace_back() = point_position.z;
+
+            /* Constraint A */
+
+            point_a_index = constraint.point[0];
+            point_b_index = this->loaded_point_list.size();
+
+            constraint.point[0] = point_a_index;
+            constraint.point[1] = point_b_index;
+            this->loaded_constraint_list.push_back(constraint);
+
+            /* Point B */
 
             point_position = {
                 static_cast<float>(x + 1) / static_cast<float>(this->plane.x),
@@ -116,9 +124,6 @@ void chorume::world_object_cloth::create() {
                 static_cast<float>(z) / static_cast<float>(this->plane.z)
             };
 
-            constraint.rest_length = 1.0f;
-            constraint.point[0] = this->loaded_point_list.size();            
-
             this->loaded_point_list.emplace_back() = {
                 .position = point_position,
                 .old_position = point_position,
@@ -126,12 +131,17 @@ void chorume::world_object_cloth::create() {
                 .rendering_index = this->geometry_resource_list.size()
             };
 
-            constraint.point[1] = this->loaded_point_list.size();
-            this->loaded_constraint_list.push_back(constraint);
-
             this->geometry_resource_list.emplace_back() = point_position.x;
             this->geometry_resource_list.emplace_back() = point_position.y;
             this->geometry_resource_list.emplace_back() = point_position.z;
+
+            /* Constraint B */
+
+            constraint.point[0] = constraint.point[1];
+            constraint.point[1] = this->loaded_point_list.size();
+            this->loaded_constraint_list.push_back(constraint);
+
+            /* Point C */
 
             point_position = {
                 static_cast<float>(x + 1) / static_cast<float>(this->plane.x),
@@ -139,8 +149,30 @@ void chorume::world_object_cloth::create() {
                 static_cast<float>(z + 1) / static_cast<float>(this->plane.z)
             };
 
-            constraint.rest_length = 1.0f;
-            constraint.point[0] = this->loaded_point_list.size();            
+            this->loaded_point_list.emplace_back() = {
+                .position = point_position,
+                .old_position = point_position,
+                .is_fixed = should_be_a_fixed_point,
+                .rendering_index = this->geometry_resource_list.size()
+            };
+
+            this->geometry_resource_list.emplace_back() = point_position.x;
+            this->geometry_resource_list.emplace_back() = point_position.y;
+            this->geometry_resource_list.emplace_back() = point_position.z;
+
+            /* Constraint C */
+
+            constraint.point[0] = constraint.point[1];
+            constraint.point[1] = this->loaded_point_list.size();
+            this->loaded_constraint_list.push_back(constraint);
+
+            /* Point D */
+
+            point_position = {
+                static_cast<float>(x) / static_cast<float>(this->plane.x),
+                0.0f,
+                static_cast<float>(z + 1) / static_cast<float>(this->plane.z)
+            };
 
             this->loaded_point_list.emplace_back() = {
                 .position = point_position,
@@ -152,6 +184,31 @@ void chorume::world_object_cloth::create() {
             this->geometry_resource_list.emplace_back() = point_position.x;
             this->geometry_resource_list.emplace_back() = point_position.y;
             this->geometry_resource_list.emplace_back() = point_position.z;
+
+            /* Constraint C */
+
+            constraint.point[0] = constraint.point[1];
+            constraint.point[1] = point_a_index;
+            this->loaded_constraint_list.push_back(constraint);
+
+            constraint.point[0] = constraint.point[1];
+        }
+    }
+
+    for (uint64_t z {}; z < this->plane.z; z++) {
+        for (uint64_t x {}; x < this->plane.x; x++) {
+            uint64_t index {z * this->plane.x + x};
+            if (x < this->plane.x - 1) {
+                constraint.point[0] = index;
+                constraint.point[1] = index + 1;
+                this->loaded_constraint_list.push_back(constraint);
+            }
+
+            if (z < this->plane.z - 1) {
+                constraint.point[0] = index;
+                constraint.point[1] = index + this->plane.x;
+                this->loaded_constraint_list.push_back(constraint);
+            }
         }
     }
 
