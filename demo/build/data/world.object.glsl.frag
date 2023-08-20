@@ -16,7 +16,7 @@ float rand(vec2 co) {
 vec3 applyUseless() {
     vec3 l = normalize(vPos - uLightPos);
     float albedo = max(dot(l, noise3(vec3(rand(vec2(l.x, l.z)), rand(vec2(l.z, l.y)), rand(vec2(l.x, l.y))))), 0.0f);
-    return vec3(gl_FragCoord.xyz * 7777.0f * 0.2f / noise3(vec3(tan(rand(vec2(l.x, l.z)) / 333.0f), rand(vec2(l.z, l.y)) / 2222.0f, rand(vec2(l.x, l.y) / 33.0f))));
+    return vec3(noise3(vec3(tan(rand(vec2(l.x, l.z)) / 0.2f), rand(vec2(l.z, l.y)) / 0.9f, rand(vec2(l.x, l.y) / 0.2f))));
 }
 
 vec3 applyDiffuseLighting() {

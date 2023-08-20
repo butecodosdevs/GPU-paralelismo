@@ -3,10 +3,25 @@
 #include "math/linear_algebra.hpp"
 #include "scene/world_object_cloth.hpp"
 #include <glm/gtc/matrix_transform.hpp>
+#include <thread>
+
+// so liga se vc habilitar ENABLE_GUI do CMakeLists
+// e tiver a GUI instalada, pagina de download:
+// https://github.com/vokegpu/ekg-ui-library
+//#define EKG
+#if defined(EKG)
+#include "ekg/ekg.hpp"
+#endif
 
 void update_mouse_editor_camera(SDL_Event &sdl_event) {
     glm::vec3 move_direction {};
     float motion_rel[2] {};
+
+    #if defined(EKG)
+    if (ekg::hovered::id) {
+        return;
+    }
+    #endif
 
     switch (sdl_event.type) {
     case SDL_MOUSEBUTTONDOWN:
@@ -20,8 +35,8 @@ void update_mouse_editor_camera(SDL_Event &sdl_event) {
         break;
 
     case SDL_MOUSEWHEEL:
-        move_direction.x = sdl_event.wheel.preciseX * 10.0f;
-        move_direction.z = sdl_event.wheel.preciseY * 10.0f;
+        move_direction.x = sdl_event.wheel.preciseX * chorume::application.camera.wheel_speed_multiplier;
+        move_direction.z = sdl_event.wheel.preciseY * chorume::application.camera.wheel_speed_multiplier;
         break;
 
     case SDL_MOUSEMOTION:
@@ -38,19 +53,26 @@ void update_mouse_editor_camera(SDL_Event &sdl_event) {
         break;
     }
 
-    float speed {0.02875f};
     float yaw {glm::radians(chorume::application.camera.yaw)};
     float pitch {glm::radians(chorume::application.camera.pitch)};
 
     glm::vec3 rotation {glm::cos(yaw), 0.0f, glm::sin(yaw)};
     glm::vec3 velocity {
-        move_direction.z * speed * rotation.x + move_direction.x * speed * rotation.z,
-        move_direction.y * speed * pitch,
-        move_direction.z * speed * rotation.z - move_direction.x * speed * rotation.x
+        move_direction.z * chorume::application.camera.speed * rotation.x + move_direction.x * chorume::application.camera.speed * rotation.z,
+        move_direction.y * chorume::application.camera.speed * pitch,
+        move_direction.z * chorume::application.camera.speed * rotation.z - move_direction.x * chorume::application.camera.speed * rotation.x
     };
 
     chorume::application.camera.position += velocity;
     chorume::linear_algebra_calculate_camera_look(sdl_event.motion.x, sdl_event.motion.y, motion_rel[0], motion_rel[1]);
+}
+
+int32_t update64(chorume::world_object_cloth *p_world_obj_coth) {
+    while (chorume::application.running) {
+        p_world_obj_coth->update();
+    }
+
+    return 0;
 }
 
 int32_t main(int32_t, char**) {
@@ -99,17 +121,36 @@ int32_t main(int32_t, char**) {
     chorume::world_object_cloth *p_world_obj_coth = new chorume::world_object_cloth();
     p_world_obj_coth->create();
     p_world_obj_coth->position.y -= 3.0f;
-    p_world_obj_coth->scale = glm::vec3(2.0f, 1.0f, 2.0f);
+    p_world_obj_coth->scale = glm::vec3(0.2f, 0.2f , 0.2f);
 
     chorume::camera &camera {chorume::application.camera};
     bool mouse_locked {};
 
     SDL_Event sdl_event {};
-
     glDisable(GL_CULL_FACE);
 
+    std::thread thread(update64, p_world_obj_coth);
+
+    #if defined(EKG)
+    ekg::runtime ekg_runtime {};
+    ekg::init(&ekg_runtime, chorume::application.p_sdl_window, "./JetBrainsMono-Bold.ttf");
+
+    ekg::frame("oi", {20.0f, 20.0f}, {200.0f, 200.0f});
+    ekg::label("Gravity:", ekg::dock::fill);
+    auto p_gravity = ekg::slider("gravity", 0.98f, 0.0f, 20.0f, ekg::dock::fill | ekg::dock::next)->set_precision(5);
+    ekg::popgroup();
+    #endif
+
     while (chorume::application.running) {
+        #if defined(EKG)
+        chorume::application.gravity = p_gravity->get_value();
+        #endif
+
         while (SDL_PollEvent(&sdl_event)) {
+            #if defined(EKG)
+            ekg::event(sdl_event);
+            #endif
+
             update_mouse_editor_camera(sdl_event);
 
             if (sdl_event.type == SDL_QUIT) {
@@ -137,18 +178,20 @@ int32_t main(int32_t, char**) {
             }
         }
 
-        // É legal sempre atualizar antes do segmento de renderização.
-        p_world_obj_coth->update();
-
         // Multiplicamos as duas matrizes: Perspectiva (definições do olho da camera e distância dos objetos) e camera view (posição, direção dela etc).
         camera.mat_projection = camera.mat_perspective *
                                 camera.mat_look_at_view;
  
+        #if defined(EKG)
+        ekg::display::dt = 0.016f;
+        ekg::update();
+        #endif
+
         // Definimos o viewport do render passa para renderizar.
         glViewport(0, 0, chorume::application.extent.w, chorume::application.extent.h);
 
         // Render pass de renderização.
-        glClearColor(0.213423894f, 0.235423894f, 0.234243894f, 1.0f);
+        glClearColor(0.213423894f * 0.0f, 0.235423894f * 0.0f, 0.234243894f * 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         //immediate_shape.invoke();
@@ -166,9 +209,15 @@ int32_t main(int32_t, char**) {
         p_world_object_program->set_uniform_vec3("uMaterialColor", &glm::vec3(1.0f, 1.0f, 1.0f)[0]);
         p_world_obj_coth->draw();
 
+        #if defined(EKG)
+        ekg::render();
+        #endif
+
         SDL_GL_SwapWindow(chorume::application.p_sdl_window);
         SDL_Delay(16);
     }
 
+    thread.join();
+    
     return 0;
 }

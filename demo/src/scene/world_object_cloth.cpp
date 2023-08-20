@@ -8,20 +8,22 @@ void chorume::world_object_cloth::update_constraint() {
     float delta_length {};
     float delta_diff {};
 
-    for (chorume::world_object_cloth::constraint &constraint : this->loaded_constraint_list) {
-        chorume::world_object_cloth::point &point_a {this->loaded_point_list.at(constraint.point[0])};
-        chorume::world_object_cloth::point &point_b {this->loaded_point_list.at(constraint.point[1])};
-
-        delta = point_b.position - point_a.position;
-        delta_length = glm::length(delta);
-        delta_diff = (delta_length - constraint.rest_length) / delta_length;
-
-        if (!point_a.is_fixed) {
-            point_a.position += delta * 0.5f * delta_diff * chorume::application.dt;
-        }
-
-        if (point_b.is_fixed) {
-            point_b.position -= delta * 0.5f * delta_diff * chorume::application.dt;
+    for (uint32_t it {}; it < 2; it++) {
+        for (chorume::world_object_cloth::constraint &constraint : this->loaded_constraint_list) {
+            chorume::world_object_cloth::point &point_a {this->loaded_point_list.at(constraint.point[0])};
+            chorume::world_object_cloth::point &point_b {this->loaded_point_list.at(constraint.point[1])};
+    
+            delta = point_b.position - point_a.position;
+            delta_length = glm::length(delta);
+            delta_diff = (delta_length - constraint.rest_length) / delta_length;
+    
+            if (!point_a.is_fixed) {
+                point_a.position += delta * 0.5f * delta_diff;
+            }
+    
+            if (!point_b.is_fixed) {
+                point_b.position -= delta * 0.5f * delta_diff;
+            }
         }
     }
 }
@@ -37,13 +39,15 @@ void chorume::world_object_cloth::update_gravity() {
 }
 
 void chorume::world_object_cloth::update_verlet_integration() {
-    glm::vec3 next_pos {};
+    glm::vec3 velocity {};
+    glm::vec3 gravity {1.0f, chorume::application.gravity, 1.0f};
+
     for (uint64_t it {}; it < this->loaded_point_list.size(); it++) {
         chorume::world_object_cloth::point &point {this->loaded_point_list.at(it)};
 
-        next_pos = point.position + (point.position - point.old_position) * chorume::application.dt * chorume::application.dt;
+        velocity = point.position - point.old_position;
         point.old_position = point.position;
-        point.position = next_pos;
+        point.position += velocity;
 
         this->geometry_resource_list.at(point.rendering_index + 0) = point.position.x;
         this->geometry_resource_list.at(point.rendering_index + 1) = point.position.y;
@@ -63,37 +67,21 @@ void chorume::world_object_cloth::create() {
     uint64_t point_b_index {};
 
     chorume::world_object_cloth::constraint constraint {};
-    constraint.rest_length = 1.0f;
+    constraint.rest_length = 1.1f;
+
+    chorume::application.dt = 0.016f;
+    this->plane = {50, 0, 50};
 
     for (int32_t x {}; x < this->plane.x; x++) {
         for (int32_t z {}; z < this->plane.z; z++) {
-            should_be_a_fixed_point = (x == 0 || z == 0);
-
-            point_position = {
-                static_cast<float>(x) / static_cast<float>(this->plane.x),
-                0.0f,
-                static_cast<float>(z) / static_cast<float>(this->plane.z)
-            };
-
-            this->loaded_point_list.emplace_back() = {
-                .position = point_position,
-                .old_position = point_position,
-                .is_fixed = should_be_a_fixed_point,
-                .rendering_index = this->geometry_resource_list.size()
-            };
-
-            this->geometry_resource_list.emplace_back() = point_position.x;
-            this->geometry_resource_list.emplace_back() = point_position.y;
-            this->geometry_resource_list.emplace_back() = point_position.z;
-
-            continue;
+            should_be_a_fixed_point = (x == 0);
 
             /* Point A */
 
             point_position = {
-                static_cast<float>(x) / static_cast<float>(this->plane.x),
+                static_cast<float>(x),
                 0.0f,
-                static_cast<float>(z) / static_cast<float>(this->plane.z)
+                static_cast<float>(z)
             };
 
             this->loaded_point_list.emplace_back() = {
@@ -106,15 +94,7 @@ void chorume::world_object_cloth::create() {
             this->geometry_resource_list.emplace_back() = point_position.x;
             this->geometry_resource_list.emplace_back() = point_position.y;
             this->geometry_resource_list.emplace_back() = point_position.z;
-
-            /* Constraint A */
-
-            point_a_index = constraint.point[0];
-            point_b_index = this->loaded_point_list.size();
-
-            constraint.point[0] = point_a_index;
-            constraint.point[1] = point_b_index;
-            this->loaded_constraint_list.push_back(constraint);
+            continue;
 
             /* Point B */
 
@@ -135,12 +115,6 @@ void chorume::world_object_cloth::create() {
             this->geometry_resource_list.emplace_back() = point_position.y;
             this->geometry_resource_list.emplace_back() = point_position.z;
 
-            /* Constraint B */
-
-            constraint.point[0] = constraint.point[1];
-            constraint.point[1] = this->loaded_point_list.size();
-            this->loaded_constraint_list.push_back(constraint);
-
             /* Point C */
 
             point_position = {
@@ -160,12 +134,6 @@ void chorume::world_object_cloth::create() {
             this->geometry_resource_list.emplace_back() = point_position.y;
             this->geometry_resource_list.emplace_back() = point_position.z;
 
-            /* Constraint C */
-
-            constraint.point[0] = constraint.point[1];
-            constraint.point[1] = this->loaded_point_list.size();
-            this->loaded_constraint_list.push_back(constraint);
-
             /* Point D */
 
             point_position = {
@@ -184,35 +152,32 @@ void chorume::world_object_cloth::create() {
             this->geometry_resource_list.emplace_back() = point_position.x;
             this->geometry_resource_list.emplace_back() = point_position.y;
             this->geometry_resource_list.emplace_back() = point_position.z;
+        }
+    }
 
-            /* Constraint C */
+    this->loaded_constraint_list.clear();
 
-            constraint.point[0] = constraint.point[1];
-            constraint.point[1] = point_a_index;
+    for (uint64_t x {}; x < this->plane.x - 1; x++) {
+        for (uint64_t z {}; z < this->plane.z - 1; z++) {
+            uint64_t i00 {(x * this->plane.z) + z};
+            uint64_t i10 {i00 + 1};
+            uint64_t i01 {i00 + this->plane.z};
+            uint64_t i11 {i01 + 1};
+
+            constraint.point[0] = i01;
+            constraint.point[1] = i11;
+
             this->loaded_constraint_list.push_back(constraint);
 
-            constraint.point[0] = constraint.point[1];
+            constraint.point[0] = i00;
+            constraint.point[1] = i01;
+
+            this->loaded_constraint_list.push_back(constraint);
         }
     }
 
-    for (uint64_t z {}; z < this->plane.z; z++) {
-        for (uint64_t x {}; x < this->plane.x; x++) {
-            uint64_t index {z * this->plane.x + x};
-            if (x < this->plane.x - 1) {
-                constraint.point[0] = index;
-                constraint.point[1] = index + 1;
-                this->loaded_constraint_list.push_back(constraint);
-            }
-
-            if (z < this->plane.z - 1) {
-                constraint.point[0] = index;
-                constraint.point[1] = index + this->plane.x;
-                this->loaded_constraint_list.push_back(constraint);
-            }
-        }
-    }
-
-    chorume::log() << this->geometry_resource_list.size();
+    chorume::log() << this->loaded_point_list.size();
+    chorume::log() << this->loaded_constraint_list.size();
 
     glGenVertexArrays(1, &this->list_buffer);
     glGenBuffers(1, &this->buffer_resources);

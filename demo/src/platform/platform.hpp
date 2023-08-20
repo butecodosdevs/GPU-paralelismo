@@ -16,7 +16,7 @@
 #include "SDL2/SDL.h"
 #include "GL/glew.h"
 
-#endif // include platform checker]
+#endif
 
 namespace chorume {
     enum class result {
@@ -31,18 +31,23 @@ namespace chorume {
 
     struct camera {
     public:
-        // propiedades espacial da camêra
+        /* propiedades espaciais */
         glm::mat4 mat_look_at_view {};
         glm::mat4 mat_ortho_view {};
         glm::mat4 mat_perspective {};
         glm::mat4 mat_projection {};
         glm::vec3 position {};
+
         float     yaw {};
         float     pitch {};
-        // configurações e estados da camêra
+
+        /* configuracoes e estados */
         float     sensitivity {0.2f};
         float     fov {90.0f};
         float     editor {};
+        float     wheel_speed_multiplier {10.0f};
+        float     speed {0.1300};
+
         int8_t    locked {};
         int8_t    moved {};
     };
@@ -55,9 +60,12 @@ namespace chorume {
         extent2d        extent {};
         SDL_GLContext   sdl_gl_context {};
         chorume::camera camera {};
-        float           gravity {0.0f};
-        // o runtime nao se importa e nem calcula delta time,
-        // pre-supondo que isso ta rodando sempre a 60fps
+        float           gravity {0.9f};
+
+        /*
+         * o runtime nao se importa e nem calcula delta time,
+         * pre-supondo que isso ta rodando sempre a 60fps
+         */
         float           dt {0.016f};
     } application;
 
