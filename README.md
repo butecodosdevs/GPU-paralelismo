@@ -1,7 +1,7 @@
 # GPU-paralelismo
 The aulas of gatinhos ao mesmo tempo
 
-![Foi escrito uma demo em C++ que implementa uma simulação de uma malha em 3D em OpenGL](demo/),  
+![Foi escrito uma demo em C++ que implementa uma simulação de uma malha em 3D OpenGL](demo/),  
 em uma janela do ![SDL2](https://www.libsdl.org/).  
 
 O compilador usado foi o GCC, no Windows [MinGW-64w](https://www.mingw-w64.org/downloads/).  
