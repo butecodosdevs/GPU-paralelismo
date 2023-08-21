@@ -124,9 +124,9 @@ int32_t main(int32_t, char**) {
     p_world_obj_coth->scale = glm::vec3(0.2f, 0.2f , 0.2f);
 
     chorume::camera &camera {chorume::application.camera};
-    bool mouse_locked {};
-
     SDL_Event sdl_event {};
+    float effect_bar_size {300.0f};
+
     glDisable(GL_CULL_FACE);
 
     std::thread thread(update64, p_world_obj_coth);
@@ -138,7 +138,7 @@ int32_t main(int32_t, char**) {
     ekg::frame("oi", {20.0f, 20.0f}, {200.0f, 200.0f});
     ekg::label("Gravity:", ekg::dock::fill);
     auto p_gravity = ekg::slider("gravity", 0.98f, 0.0f, 20.0f, ekg::dock::fill | ekg::dock::next)->set_precision(5);
-    ekg::popgroup();
+    ekg::pop_group();
     #endif
 
     while (chorume::application.running) {
@@ -171,7 +171,7 @@ int32_t main(int32_t, char**) {
 
                 camera.mat_perspective = glm::perspective(glm::radians(camera.fov), aspect, 0.03f, far);
                 camera.mat_ortho_view = {
-                    chorume::linear_algebra_calculate_orthographic_matrix(0.0f, viewport_extent[0], viewport_extent[0], 0.0f)
+                    chorume::linear_algebra_calculate_orthographic_matrix(0.0f, viewport_extent[0], viewport_extent[1], 0.0f)
                 };
 
                 chorume::log() << "Janela redimensionada " << sdl_event.window.data1 << 'x' << sdl_event.window.data2;
@@ -194,9 +194,9 @@ int32_t main(int32_t, char**) {
         glClearColor(0.213423894f * 0.0f, 0.235423894f * 0.0f, 0.234243894f * 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        //immediate_shape.invoke();
-        //immediate_shape.draw({20.0f, 20.0f, 20.0f, 20.0f}, {0.0f, 0.034234324f, 0.9894543f, 1.0f});
-        //immediate_shape.revoke();
+        immediate_shape.invoke();
+        immediate_shape.draw({(float) chorume::application.extent.w - effect_bar_size, 0.0f, effect_bar_size, (float) chorume::application.extent.h}, {0.0f, 0.034234324f, 0.9894543f, 1.0f});
+        immediate_shape.revoke();
 
         glUseProgram(p_world_object_program->program);
 

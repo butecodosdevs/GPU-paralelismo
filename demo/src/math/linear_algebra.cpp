@@ -39,6 +39,7 @@ glm::mat4 chorume::linear_algebra_calculate_orthographic_matrix(float left, floa
     float near {
         0.0f
     };
+    return glm::ortho(left, right, bottom, top);
 
     return glm::mat4 {
         2.0f / (right - left), 0.0f, 0.0f, 0.0f,
