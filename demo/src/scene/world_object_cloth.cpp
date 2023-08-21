@@ -75,71 +75,10 @@ void chorume::world_object_cloth::create() {
     for (int32_t x {}; x < this->plane.x; x++) {
         for (int32_t z {}; z < this->plane.z; z++) {
             should_be_a_fixed_point = (x == 0);
-
-            /* Point A */
-
             point_position = {
                 static_cast<float>(x),
                 0.0f,
                 static_cast<float>(z)
-            };
-
-            this->loaded_point_list.emplace_back() = {
-                .position = point_position,
-                .old_position = point_position,
-                .is_fixed = should_be_a_fixed_point,
-                .rendering_index = this->geometry_resource_list.size()
-            };
-
-            this->geometry_resource_list.emplace_back() = point_position.x;
-            this->geometry_resource_list.emplace_back() = point_position.y;
-            this->geometry_resource_list.emplace_back() = point_position.z;
-            continue;
-
-            /* Point B */
-
-            point_position = {
-                static_cast<float>(x + 1) / static_cast<float>(this->plane.x),
-                0.0f,
-                static_cast<float>(z) / static_cast<float>(this->plane.z)
-            };
-
-            this->loaded_point_list.emplace_back() = {
-                .position = point_position,
-                .old_position = point_position,
-                .is_fixed = should_be_a_fixed_point,
-                .rendering_index = this->geometry_resource_list.size()
-            };
-
-            this->geometry_resource_list.emplace_back() = point_position.x;
-            this->geometry_resource_list.emplace_back() = point_position.y;
-            this->geometry_resource_list.emplace_back() = point_position.z;
-
-            /* Point C */
-
-            point_position = {
-                static_cast<float>(x + 1) / static_cast<float>(this->plane.x),
-                0.0f,
-                static_cast<float>(z + 1) / static_cast<float>(this->plane.z)
-            };
-
-            this->loaded_point_list.emplace_back() = {
-                .position = point_position,
-                .old_position = point_position,
-                .is_fixed = should_be_a_fixed_point,
-                .rendering_index = this->geometry_resource_list.size()
-            };
-
-            this->geometry_resource_list.emplace_back() = point_position.x;
-            this->geometry_resource_list.emplace_back() = point_position.y;
-            this->geometry_resource_list.emplace_back() = point_position.z;
-
-            /* Point D */
-
-            point_position = {
-                static_cast<float>(x) / static_cast<float>(this->plane.x),
-                0.0f,
-                static_cast<float>(z + 1) / static_cast<float>(this->plane.z)
             };
 
             this->loaded_point_list.emplace_back() = {
