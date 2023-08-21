@@ -53,7 +53,7 @@ Começo
 
     - Trazer os motivos. 
 
-5- Conclusões. 
+6- Conclusões. 
 
     - Diferentes áreas que necessitam de uma boa base de conhecimento específico. 
 
@@ -67,7 +67,7 @@ Programação e a Realidade
 
   
 
-5- Introdução ao funcionamento da GPU. 
+7- Introdução ao funcionamento da GPU. 
 
     - Breve explicação sobre o conceito de pipelines e como a GPU é diferente em comparação com a CPU. 
 
@@ -77,7 +77,7 @@ Programação e a Realidade
 
     - Papel do OpenGL e Vulkan. 
 
-6- Renderização. 
+8- Renderização. 
 
     - Diferença de fundamentos entre OpenGL e Vulkan. 
 
@@ -93,7 +93,7 @@ Programação e a Realidade
 
     - Algoritmos de renderização. 
 
-7- Principais fornecedores/vendor: Nvidia, AMD e Intel. 
+9- Principais fornecedores/vendor: Nvidia, AMD e Intel. 
 
     - Porque diferentes fornecedores/vendor (marcas) de GPUs conseguem renderizar as mesmas coisas. 
 
@@ -101,7 +101,7 @@ Programação e a Realidade
 
     - Quais as dificuldades de programar engines e a incompatibilidade de arquiteturas em diferentes fornecedores/vendor de GPUs. 
 
-8- Otimização via GPU, solução de falta de poder computacional e AI. 
+10- Otimização via GPU, solução de falta de poder computacional e AI. 
 
     - Como ocorre a otimização via GPU - Compute shaders -. 
 
@@ -109,7 +109,7 @@ Programação e a Realidade
 
     - Uso de energia e processo de sincronização externa. 
 
-9- Conclusões. 
+11- Conclusões. 
 
     - Como a GPU é diferente da CPU. 
 
