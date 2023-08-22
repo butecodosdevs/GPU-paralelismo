@@ -66,7 +66,7 @@ cmake --build ./cmake-build-debug
 
 Embora eu tenha escrito os textos, não posso deixar de citar as refêrencias das quais tive (e não só para esse projeto, mas durante meu estudo de anos).
 
-https://developer.nvidia.com/gpugems/gpugems/contributors 
+https://developer.nvidia.com/gpugems/gpugems/contributors  
 https://developer.nvidia.com/gpugems/gpugems2/part-iv-general-purpose-computation-gpus-primer/chapter-29-streaming-architectures  
 https://pt.wikipedia.org/wiki/Stream_processing  
 https://pt.wikipedia.org/wiki/Pipeline_(hardware)  
