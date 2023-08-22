@@ -53,6 +53,11 @@ void update_mouse_editor_camera(SDL_Event &sdl_event) {
         break;
     }
 
+    /*
+     * Conforme a quantidade do angulo da camera e alterado,
+     * a movimentacao vai ir nessa nova direcao.
+     */
+
     float yaw {glm::radians(chorume::application.camera.yaw)};
     float pitch {glm::radians(chorume::application.camera.pitch)};
 
@@ -201,6 +206,8 @@ int32_t main(int32_t, char**) {
         glUseProgram(p_world_object_program->program);
 
         p_world_obj_coth->invoke();
+
+        // P * M (projection * model)
         glm::mat4 mat_modelview_perspective {camera.mat_projection * p_world_obj_coth->mat_model_trs};
 
         p_world_object_program->set_uniform_mat4("uMatrixProjection", &mat_modelview_perspective[0][0]);
@@ -213,7 +220,7 @@ int32_t main(int32_t, char**) {
         ekg::render();
         #endif
 
-        SDL_GL_SwapWindow(chorume::application.p_sdl_window);
+        SDL_GL_SwapWindow(chorume::application.p_sdl_window); // swap de imagens (swapchain present etc)
         SDL_Delay(16);
     }
 

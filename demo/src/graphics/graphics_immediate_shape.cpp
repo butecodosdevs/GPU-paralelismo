@@ -69,32 +69,34 @@ void chorume::graphics_immediate_shape::set_pipeline_program(uint32_t _pipeline_
 }
 
 void chorume::graphics_immediate_shape::invoke() {
-    glUseProgram(this->pipeline_program);
+    glUseProgram(this->pipeline_program); // programa do pipeline ligado
     glBindVertexArray(this->list_buffer_id);
 
-    glDisable(GL_DEPTH_TEST);
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    // Esses estados sao os mencionados no processo de rasterizacao
+
+    glDisable(GL_DEPTH_TEST); // depth test desabilitado
+    glEnable(GL_BLEND); // blending habilitado
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // definicoes do blending
 
     this->delta += 0.016f;
-    glUniform1f(glGetUniformLocation(this->pipeline_program, "uDelta"), this->delta);
+    glUniform1f(glGetUniformLocation(this->pipeline_program, "uDelta"), this->delta); // uniforms dinamicos
 
     glActiveTexture(GL_TEXTURE0);
     glUniformMatrix4fv(this->uniform_location_matrix_projection_id, GL_TRUE, GL_FALSE,
-                       &chorume::application.camera.mat_ortho_view[0][0]);
+                       &chorume::application.camera.mat_ortho_view[0][0]); // uniforms dinamicos
 }
 
 void chorume::graphics_immediate_shape::draw(const glm::vec4 &rect, const glm::vec4 &color, uint32_t texture) {
-    glUniform4f(this->uniform_location_rect_id, rect.x, rect.y, rect.z, rect.w);
-    glUniform4f(this->uniform_location_color_id, color.x, color.y, color.z, color.w);
-    glUniform1i(this->uniform_location_is_texture_active_id, texture);
+    glUniform4f(this->uniform_location_rect_id, rect.x, rect.y, rect.z, rect.w); // uniforms dinamicos
+    glUniform4f(this->uniform_location_color_id, color.x, color.y, color.z, color.w); // uniforms dinamicos
+    glUniform1i(this->uniform_location_is_texture_active_id, texture); // uniforms dinamicos
 
     if (this->current_texture_bound != texture) {
         this->current_texture_bound = texture;
         glBindTexture(GL_TEXTURE_2D, texture);
     }
 
-    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, (void*)0);
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, nullptr); // draw call
 }
 
 void chorume::graphics_immediate_shape::revoke() {
@@ -102,5 +104,5 @@ void chorume::graphics_immediate_shape::revoke() {
     glDisable(GL_BLEND);
 
     glBindVertexArray(0);
-    glUseProgram(0);
+    glUseProgram(0); // nenhuma pipeline ligada
 }

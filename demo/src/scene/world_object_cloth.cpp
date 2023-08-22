@@ -56,6 +56,8 @@ void chorume::world_object_cloth::update_verlet_integration() {
 }
 
 void chorume::world_object_cloth::create() {
+    this->auto_registry();
+
     if (this->list_buffer) {
         return;
     }
