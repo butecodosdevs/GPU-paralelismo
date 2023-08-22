@@ -63,9 +63,12 @@ cmake --build ./cmake-build-debug
 
 ---
 
-# Créditos e refêrencias
+# Agradecimentos, créditos e refêrencias.
 
-Embora eu tenha escrito os textos, não posso deixar de citar as refêrencias das quais tive (e não só para esse projeto, mas durante meus anos de estudo).
+Embora eu tenha escrito os textos, não posso deixar de citar as refêrencias das quais tive (e não só para esse projeto, mas durante meus anos de estudo).  
+Outra coisa que preciso salientar, é que todo esse meu conhecimento não foi do dia para a noite, e não sei nem 5% sobre esse assunto, reconheço minha ignorância sobre alguns
+aspectos desse assunto, busco compartilhar o que sei, e se estou errada, por favor, me corriga.  
+Se você se interessou, não deixe de pesquisar, ir atrás, aprender <3.
 
 https://developer.nvidia.com/gpugems/gpugems/contributors  
 https://developer.nvidia.com/gpugems/gpugems2/part-iv-general-purpose-computation-gpus-primer/chapter-29-streaming-architectures  
