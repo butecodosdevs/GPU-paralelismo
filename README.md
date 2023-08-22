@@ -67,8 +67,8 @@ cmake --build ./cmake-build-debug
 
 Embora eu tenha escrito os textos, não posso deixar de citar as refêrencias das quais tive (e não só para esse projeto, mas durante meus anos de estudo).  
 Outra coisa que preciso salientar, é que todo esse meu conhecimento não foi do dia para a noite, e não sei nem 5% sobre esse assunto, reconheço minha ignorância sobre alguns
-aspectos desse assunto, busco compartilhar o que sei, e se estou errada, por favor, me corriga.  
-Se você se interessou, não deixe de pesquisar, ir atrás, aprender <3.
+aspectos desse assunto, busco compartilhar o que sei, e se estou errada, por favor, me corrija.  
+Se você se interessou, não deixe de pesquisar, ir atrás, aprender ❤️💕.
 
 https://developer.nvidia.com/gpugems/gpugems/contributors  
 https://developer.nvidia.com/gpugems/gpugems2/part-iv-general-purpose-computation-gpus-primer/chapter-29-streaming-architectures  
@@ -78,4 +78,4 @@ https://www.intel.com.br/content/www/br/pt/products/sku/126688/intel-core-i38100
 https://www.realtimerendering.com/  
 https://on-demand.gputechconf.com/siggraph/2016/presentation/sig1609-kilgard-jeffrey-keil-nvidia-opengl-in-2016.pdf  
 
-🐈
+🐈💕
