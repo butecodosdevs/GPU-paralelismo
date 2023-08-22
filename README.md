@@ -77,5 +77,6 @@ https://pt.wikipedia.org/wiki/Pipeline_(hardware)
 https://www.intel.com.br/content/www/br/pt/products/sku/126688/intel-core-i38100-processor-6m-cache-3-60-ghz/specifications.html  
 https://www.realtimerendering.com/  
 https://on-demand.gputechconf.com/siggraph/2016/presentation/sig1609-kilgard-jeffrey-keil-nvidia-opengl-in-2016.pdf  
+https://www.anandtech.com/show/10446/the-amd-radeon-rx-480-preview/3  
 
 🐈💕
