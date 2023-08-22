@@ -57,6 +57,21 @@ cmake --build ./cmake-build-debug
 ![Situação do Brasil e o campo graphics programming](4/4-.md)  
 - Situação no cenário Brasileiro e uma crítica.
 
+![Resumo sobre central processor unit (CPU) e graphics processor unit (GPU), e sua implementação via software](6/6-.md)  
+- Situação no cenário Brasileiro e uma crítica.
+
 ---
+
+# Créditos e refêrencias
+
+Embora eu tenha escrito os textos, não posso deixar de citar as refêrencias das quais estudei.
+
+https://developer.nvidia.com/gpugems/gpugems/contributors
+https://developer.nvidia.com/gpugems/gpugems2/part-iv-general-purpose-computation-gpus-primer/chapter-29-streaming-architectures
+https://pt.wikipedia.org/wiki/Stream_processing
+https://pt.wikipedia.org/wiki/Pipeline_(hardware)
+https://www.intel.com.br/content/www/br/pt/products/sku/126688/intel-core-i38100-processor-6m-cache-3-60-ghz/specifications.html
+https://www.realtimerendering.com/
+https://on-demand.gputechconf.com/siggraph/2016/presentation/sig1609-kilgard-jeffrey-keil-nvidia-opengl-in-2016.pdf
 
 🐈
