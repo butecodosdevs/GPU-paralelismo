@@ -58,7 +58,8 @@ cmake --build ./cmake-build-debug
 - Situação no cenário Brasileiro e uma crítica.
 
 ![Resumo sobre central processor unit (CPU) e graphics processor unit (GPU), e sua implementação via software](6/6-.md)  
-- Situação no cenário Brasileiro e uma crítica.
+- Um funcionamento geral dos microprocessadores e uma analise mais profunda sobre o funcionamento no caso das GPUs.
+- Analise sobre as APIs de propósito gerais, aprofundamento sobre a filosofia das APIs modernas e suas diferenças com as legadas (OpenGL, DirectX 11).
 
 ---
 
