@@ -75,7 +75,6 @@ Outra coisa que preciso salientar, é que todo esse meu conhecimento não foi do
 aspectos desse assunto, busco compartilhar o que sei, e se estou errada, por favor, me corrija.  
 Se você se interessou, não deixe de pesquisar, ir atrás, aprender ❤️💕.
 
-https://en.wikipedia.org/wiki/Single_instruction,_multiple_data  
 https://www.khronos.org/opengl/wiki/Shader  
 https://developer.nvidia.com/gpugems/gpugems/contributors    
 https://developer.nvidia.com/gpugems/gpugems2/part-iv-general-purpose-computation-gpus-primer/chapter-29-streaming-architectures  
@@ -85,5 +84,7 @@ https://www.intel.com.br/content/www/br/pt/products/sku/126688/intel-core-i38100
 https://www.anandtech.com/show/10446/the-amd-radeon-rx-480-preview/3  
 https://pt.wikipedia.org/wiki/Stream_processing  
 https://pt.wikipedia.org/wiki/Pipeline_(hardware)  
+https://en.wikipedia.org/wiki/Single_instruction,_multiple_data 
+https://en.wikipedia.org/wiki/Instruction_pipelining   
 
 🐈💕
