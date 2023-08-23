@@ -41,6 +41,10 @@ cmake --build ./cmake-build-debug
 
 [Em considerção foi escrito um site em cima do webgl que renderiza efeitos procedurais pela GPU.](https://chorumedev.github.io/GPU-paralelismo/)
 
+`./index.html` HTML do site.  
+`./website/` Scripts do site.  
+`./demo/` Source do simulador de malha 3D em   C++.
+
 🐈‍⬛ -> 🐈 -> 🐈‍⬛ -> 🐈 -> 🐈‍⬛
 
 ----
