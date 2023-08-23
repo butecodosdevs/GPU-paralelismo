@@ -16,6 +16,8 @@ no caminho de bibliotecas do toolchain (compilador).  As DLLs das biblioteca sã
 Para compilar no Linux, são os mesmo comandos portanto que tenha baixado todas as depêndencias.  
 Devem ser baixadas `libsdl2-dev` e o `libglew-dev` com o gerenciador de pacotes do seu Linux.
 
+`./demo/` Código fonte do simulador de malha 3D em C++.  
+
 ```bat
 :: cd demo/
 
@@ -43,7 +45,6 @@ cmake --build ./cmake-build-debug
 
 `./index.html` HTML do site.  
 `./website/` Scripts do site.  
-`./demo/` Source do simulador de malha 3D em   C++.
 
 🐈‍⬛ -> 🐈 -> 🐈‍⬛ -> 🐈 -> 🐈‍⬛
 
