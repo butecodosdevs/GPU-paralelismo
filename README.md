@@ -16,6 +16,8 @@ no caminho de bibliotecas do toolchain (compilador).  As DLLs das biblioteca sã
 Para compilar no Linux, são os mesmo comandos portanto que tenha baixado todas as depêndencias.  
 Devem ser baixadas `libsdl2-dev` e o `libglew-dev` com o gerenciador de pacotes do seu Linux.
 
+`./demo/` Código fonte do simulador de malha 3D em C++.  
+
 ```bat
 :: cd demo/
 
@@ -40,6 +42,9 @@ cmake --build ./cmake-build-debug
 ```
 
 [Em considerção foi escrito um site em cima do webgl que renderiza efeitos procedurais pela GPU.](https://chorumedev.github.io/GPU-paralelismo/)
+
+`./index.html` HTML do site.  
+`./website/` Scripts do site.  
 
 🐈‍⬛ -> 🐈 -> 🐈‍⬛ -> 🐈 -> 🐈‍⬛
 
@@ -82,6 +87,7 @@ https://developer.nvidia.com/gpugems/gpugems/contributors
 https://developer.nvidia.com/gpugems/gpugems2/part-iv-general-purpose-computation-gpus-primer/chapter-29-streaming-architectures  
 https://on-demand.gputechconf.com/siggraph/2016/presentation/sig1609-kilgard-jeffrey-keil-nvidia-opengl-in-2016.pdf  
 https://www.realtimerendering.com/  
+ https://iquilezles.org/articles/  
 https://www.intel.com.br/content/www/br/pt/products/sku/126688/intel-core-i38100-processor-6m-cache-3-60-ghz/specifications.html  
 https://www.anandtech.com/show/10446/the-amd-radeon-rx-480-preview/3  
 https://pt.wikipedia.org/wiki/Stream_processing  
