@@ -82,6 +82,7 @@ https://developer.nvidia.com/gpugems/gpugems/contributors
 https://developer.nvidia.com/gpugems/gpugems2/part-iv-general-purpose-computation-gpus-primer/chapter-29-streaming-architectures  
 https://on-demand.gputechconf.com/siggraph/2016/presentation/sig1609-kilgard-jeffrey-keil-nvidia-opengl-in-2016.pdf  
 https://www.realtimerendering.com/  
+ https://iquilezles.org/articles/  
 https://www.intel.com.br/content/www/br/pt/products/sku/126688/intel-core-i38100-processor-6m-cache-3-60-ghz/specifications.html  
 https://www.anandtech.com/show/10446/the-amd-radeon-rx-480-preview/3  
 https://pt.wikipedia.org/wiki/Stream_processing  
