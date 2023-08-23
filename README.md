@@ -39,7 +39,7 @@ cmake -S . -B ./cmake-build-debug -G "MinGW Makefiles"
 cmake --build ./cmake-build-debug
 ```
 
-[Em considerção escrevi um site em cima do webgl que renderiza efeitos procedurais pela GPU.]()
+[Em considerção foi escrito um site em cima do webgl que renderiza efeitos procedurais pela GPU.](https://chorumedev.github.io/GPU-paralelismo/)
 
 🐈‍⬛ -> 🐈 -> 🐈‍⬛ -> 🐈 -> 🐈‍⬛
 
