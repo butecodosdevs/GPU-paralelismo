@@ -75,6 +75,7 @@ Outra coisa que preciso salientar, é que todo esse meu conhecimento não foi do
 aspectos desse assunto, busco compartilhar o que sei, e se estou errada, por favor, me corrija.  
 Se você se interessou, não deixe de pesquisar, ir atrás, aprender ❤️💕.
 
+https://en.wikipedia.org/wiki/Single_instruction,_multiple_data  
 https://www.khronos.org/opengl/wiki/Shader  
 https://developer.nvidia.com/gpugems/gpugems/contributors    
 https://developer.nvidia.com/gpugems/gpugems2/part-iv-general-purpose-computation-gpus-primer/chapter-29-streaming-architectures  
