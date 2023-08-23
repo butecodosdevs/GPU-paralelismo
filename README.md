@@ -63,7 +63,7 @@ cmake --build ./cmake-build-debug
 
 ![Diferenças entre APIs, detalhes e processo do pipeline gráfico.](7/7-.md)
 - Uma analise mais profunda sobre as filosofias do Vulkan e OpenGL.
-- O que é um buffer? sobre o termo buffer comulmente usado em várias APIs.
+- O que é um buffer? sobre o termo buffer comumente usado em várias APIs.
 - Processo de fetch de shader e detalhes sobre a execução das shaders.
   
 ---
