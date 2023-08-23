@@ -61,6 +61,11 @@ cmake --build ./cmake-build-debug
 - Um funcionamento geral dos microprocessadores e uma analise mais profunda sobre o funcionamento no caso das GPUs.
 - Analise sobre as APIs de propósito gerais, aprofundamento sobre a filosofia das APIs modernas e suas diferenças com as legadas (OpenGL, DirectX 11).
 
+![Diferenceças entre APIs, detalhamento e processos do pipeline gráfico.](7/7-.md)
+- Uma analise mais profunda sobre as filosofias do Vulkan e OpenGL.
+- O que é um buffer? sobre o termo buffer comulmente usado em várias APIs.
+- Processo de fetch de shader e detalhes sobre a execução das shaders.
+  
 ---
 
 # Agradecimentos, créditos e refêrencias.
