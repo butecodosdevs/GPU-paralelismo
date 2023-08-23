@@ -47,23 +47,23 @@ cmake --build ./cmake-build-debug
 
 ![Sumario](sumario/sumario.md) 
 
-![Apresentação e introdução](1/1-.md) 
+![Apresentação e introdução](1/) 
 - Resumo sobre a GPU e a sua importância de um modo geral.
 
-![Qual a base de conhecimento e a preparação necessária para iniciar nessa área](2/2-.md)  
+![Qual a base de conhecimento e a preparação necessária para iniciar nessa área](2/)  
 - Informação sobre o conhecimento necessário para prosseguir com essa carreira.
 
-![Quais os diferentes campos e sua situação no mercado exterior](3/3-.md)  
+![Quais os diferentes campos e sua situação no mercado exterior](3/)  
 - Situação no mercado atual e como é o trabalho.  
 
-![Situação do Brasil e o campo graphics programming](4/4-.md)  
+![Situação do Brasil e o campo graphics programming](4/)  
 - Situação no cenário Brasileiro e uma crítica.
 
-![Resumo sobre central processor unit (CPU) e graphics processor unit (GPU), e sua implementação via software](6/6-.md)  
+![Resumo sobre central processor unit (CPU) e graphics processor unit (GPU), e sua implementação via software](6/)  
 - Um funcionamento geral dos microprocessadores e uma analise mais profunda sobre o funcionamento no caso das GPUs.
 - Analise sobre as APIs de propósito gerais, aprofundamento sobre a filosofia das APIs modernas e suas diferenças com as legadas (OpenGL, DirectX 11).
 
-![Diferenças entre APIs, detalhes e processo do pipeline gráfico.](7/7-.md)
+![Diferenças entre APIs, detalhes e processo do pipeline gráfico.](7/)
 - Uma analise mais profunda sobre as filosofias do Vulkan e OpenGL.
 - O que é um buffer? sobre o termo buffer comumente usado em várias APIs.
 - Processo de fetch de shader e detalhes sobre a execução das shaders.
