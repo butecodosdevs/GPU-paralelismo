@@ -8,8 +8,8 @@
 // so liga se vc habilitar ENABLE_GUI do CMakeLists
 // e tiver a GUI instalada, pagina de download:
 // https://github.com/vokegpu/ekg-ui-library
-//#define EKG
-#if defined(EKG)
+#define GUI_MODE_EKG
+#if defined(GUI_MODE_EKG)
 #include "ekg/ekg.hpp"
 #endif
 
@@ -17,7 +17,7 @@ void update_mouse_editor_camera(SDL_Event &sdl_event) {
     glm::vec3 move_direction {};
     float motion_rel[2] {};
 
-    #if defined(EKG)
+    #if defined(GUI_MODE_EKG)
     if (ekg::hovered::id) {
         return;
     }
@@ -136,7 +136,7 @@ int32_t main(int32_t, char**) {
 
     std::thread thread(update64, p_world_obj_coth);
 
-    #if defined(EKG)
+    #if defined(GUI_MODE_EKG)
     ekg::runtime ekg_runtime {};
     ekg::init(&ekg_runtime, chorume::application.p_sdl_window, "./JetBrainsMono-Bold.ttf");
 
@@ -147,12 +147,12 @@ int32_t main(int32_t, char**) {
     #endif
 
     while (chorume::application.running) {
-        #if defined(EKG)
+        #if defined(GUI_MODE_EKG)
         chorume::application.gravity = p_gravity->get_value();
         #endif
 
         while (SDL_PollEvent(&sdl_event)) {
-            #if defined(EKG)
+            #if defined(GUI_MODE_EKG)
             ekg::event(sdl_event);
             #endif
 
@@ -187,7 +187,7 @@ int32_t main(int32_t, char**) {
         camera.mat_projection = camera.mat_perspective *
                                 camera.mat_look_at_view;
  
-        #if defined(EKG)
+        #if defined(GUI_MODE_EKG)
         ekg::display::dt = 0.016f;
         ekg::update();
         #endif
@@ -210,13 +210,16 @@ int32_t main(int32_t, char**) {
         // P * M (projection * model)
         glm::mat4 mat_modelview_perspective {camera.mat_projection * p_world_obj_coth->mat_model_trs};
 
+        glEnable(GL_DEPTH_TEST);
+
         p_world_object_program->set_uniform_mat4("uMatrixProjection", &mat_modelview_perspective[0][0]);
         p_world_object_program->set_uniform_mat4("uMatrixModel", &p_world_obj_coth->mat_model_trs[0][0]);
         p_world_object_program->set_uniform_vec3("uLightPos", &glm::vec3(20.0f, 5.0f, 0.0f)[0]);
         p_world_object_program->set_uniform_vec3("uMaterialColor", &glm::vec3(1.0f, 1.0f, 1.0f)[0]);
         p_world_obj_coth->draw();
 
-        #if defined(EKG)
+        #if defined(GUI_MODE_EKG)
+        glDisable(GL_DEPTH_TEST);
         ekg::render();
         #endif
 
