@@ -137,21 +137,20 @@ var target = 2.1;
 var reset = false;
 
 function onrender() {
-    gl.viewport(0, 0, canvas.width, canvas.height); // definimos as definicoes do viewport do site
+    delta += 0.016;
+
+    gl.viewport(0, 0, canvas.width, canvas.height); // definimos o viewport do site
     gl.clearColor(0.0, 0.0, 0.0, 1.0);              // definimos a cor do background
     gl.clear(gl.COLOR_BUFFER_BIT);                  // limpamos os buffers passados da tela
 
     pipelineprogram.invoke(); // habilitamos o programa do pipeline
-
-
-    delta += 0.016;
-
     pipelineprogram.setuniformfloat("uDelta", delta); // atualizamos o uniform buffer com o valor continuo delta.
 
-
-    quad.invoke();            // ligamos o buffer q queremos renderizar
-    quad.draw();              // renderizamos
+    quad.invoke(); // ligamos o buffer q queremos renderizar
+    quad.draw(); // draw call
     quad.revoke();
+
+    // desligamos o pipeline
     pipelineprogram.revoke();
 
     // """ Swap buffers """
