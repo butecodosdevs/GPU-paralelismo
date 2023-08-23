@@ -102,9 +102,10 @@ var pipelineprogram = new vokeprogram([
     }
 
     void main() {
-        float f = (noise(vec2(length((rand(vec2(9.0, 6766.0))) / (uDelta) - tan(tan((gl_FragCoord.yx * 0.2) * fract(0.060))) * fract(0.09)))));
-        gl_FragColor = (vec4(fract(f), rand(vec2((rand(vec2(uDelta, 663.0))))) / f, 10.0, 1.0));
-        gl_FragColor = mix(gl_FragColor / f, (vec4(((f  * sin(uDelta))))), 1.0);
+        float f = (noise(vec2(length((rand(vec2(sin(0.0002), 6766.0))) / tan(uDelta * 0.2) - fract(sin((gl_FragCoord.yx) * fract(0.020))) * fract(0.09 * uDelta)))));
+        gl_FragColor = (vec4(fract(f), rand(vec2((rand(vec2(666.0, sin(2.0)))))) / f, 10.0, 1.0));
+        gl_FragColor = mix(gl_FragColor, vec4(rand(vec2(f, 100.0*100.0 / tan(2.0))) / f * 0.343, f - 0.32, gl_FragCoord.y / 21312.0, f), length(gl_FragColor.x / f * cos(uDelta * 0.2)));
+
         gl_FragColor.w = 1.0;
     }
     `,
@@ -131,7 +132,9 @@ quad.revoke();
 quad.setprimitive(gl.TRIANGLES);
 quad.setstride(0, 6, 0);
 
-var delta = 0.01;
+var delta = Math.random() * 2.0;
+var target = 2.1;
+var reset = false;
 
 function onrender() {
     gl.viewport(0, 0, canvas.width, canvas.height); // definimos as definicoes do viewport do site
@@ -140,7 +143,9 @@ function onrender() {
 
     pipelineprogram.invoke(); // habilitamos o programa do pipeline
 
-    delta += 0.00016;
+
+    delta += 0.016;
+
     pipelineprogram.setuniformfloat("uDelta", delta); // atualizamos o uniform buffer com o valor continuo delta.
 
 
