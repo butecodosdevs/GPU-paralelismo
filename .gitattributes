@@ -1,1 +1,1 @@
-website/*.* linguist-language=C++
+*.html -linguist-detectable
