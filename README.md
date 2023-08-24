@@ -98,7 +98,7 @@ NVIDIA Ada Lovelace (citei um texto): https://www.nvidia.com/pt-br/geforce/ada-l
 Preview da RX 480: https://www.anandtech.com/show/10446/the-amd-radeon-rx-480-preview/3  
 Stream processing: https://pt.wikipedia.org/wiki/Stream_processing  
 CPU pipeline: https://pt.wikipedia.org/wiki/Pipeline_(hardware)  
-SIMD: https://en.wikipedia.org/wiki/Single_instruction,_multiple_data 
+SIMD: https://en.wikipedia.org/wiki/Single_instruction,_multiple_data  
 Pipeline de instruções: https://en.wikipedia.org/wiki/Instruction_pipelining   
 
 🐈💕
