@@ -72,7 +72,12 @@ cmake --build ./cmake-build-debug
 - Uma analise mais profunda sobre as filosofias do Vulkan e OpenGL.
 - O que é um buffer? sobre o termo buffer comumente usado em várias APIs.
 - Processo de fetch de shader e detalhes sobre a execução das shaders.
-  
+
+![Microarquiteturas de fornecedores: NVIDIA, AMD e Intel](8/8-.md)
+- Um pouco sobre as microarquiteturas e suas técnologias.
+- Como diferentes fornecedores criam extensões para as APIs.
+- Incompatibilidades em engines.
+
 ---
 
 # Agradecimentos, créditos e refêrencias.
