@@ -21,6 +21,7 @@ var pipelineprogram = new vokeprogram([
     src:`
     precision mediump float;
     uniform float uDelta;
+    uniform float uIntensity;
 
     float rand(vec2 co) {
         return fract(tan(dot(co, vec2(12.9898, 78.233))) * 43758.5453);
@@ -102,11 +103,20 @@ var pipelineprogram = new vokeprogram([
     }
 
     void main() {
-        float f = (noise(vec2(length((rand(vec2(sin(0.0002), 6766.0))) / tan(uDelta * 0.2) - fract(sin((gl_FragCoord.yx) * fract(0.020))) * fract(0.09 * uDelta)))));
+        float i  = uIntensity;
+        float f  = (noise(vec2(length((rand(vec2(tan(0.0002), 6766.0))) / fract(uDelta * 0.2) - tan(cos((gl_FragCoord.yx * 2.0) * fract(0.020))) * fract(0.09 * uDelta)))));
+        float f2 = (noise(vec2(length((rand(vec2(tan(0.0002), 6766.0))) / sin(uDelta * 0.002) / cos(uDelta * 0.002) - sin(tan((gl_FragCoord.yx) * fract(0.020))) * sin(0.09 * uDelta)))));
+
+        gl_FragColor = vec4(f2, f, f2, f2);
+        //gl_FragColor = (vec4(fract(f), rand(vec2((rand(vec2(666.0, sin(2.0)))))) / f, 10.0, 1.0));
+        gl_FragColor = mix(gl_FragColor, vec4(rand(vec2(222.0, 666.02)) / f2 / 0.26 * i, f - ((0.333666 * i) / uDelta), f2 / (666.0 * i) * uDelta, f), length(gl_FragColor.x / f / f2 / cos(uDelta * 0.2)));
+        gl_FragColor = mix(gl_FragColor, vec4(f2 - f, f2 / f, f2 * f, 1.0), length(f * f2 / cos(uDelta * 0.2)));
+
+        f = (noise(vec2(length((rand(vec2(sin(0.0002), 6766.0))) / tan(uDelta * 0.2 * i) - fract(sin((gl_FragCoord.yx) * fract(0.020 * i))) * fract(0.09 * uDelta)))));
         gl_FragColor = (vec4(fract(f), rand(vec2((rand(vec2(666.0, sin(2.0)))))) / f, 10.0, 1.0));
         gl_FragColor = mix(gl_FragColor, vec4(rand(vec2(f, 100.0*100.0 / tan(2.0))) / f * 0.343, f - 0.32, gl_FragCoord.y / 21312.0, f), length(gl_FragColor.x / f * cos(uDelta * 0.2)));
-
         gl_FragColor.w = 1.0;
+        gl_FragColor = mix(gl_FragColor, vec4(f2 - f * i, f2 / f * i, f2 * f * i, 1.0), length(f * f2 / cos(uDelta * 0.2)));
     }
     `,
     stage: gl.FRAGMENT_SHADER
@@ -133,18 +143,39 @@ quad.setprimitive(gl.TRIANGLES);
 quad.setstride(0, 6, 0);
 
 var delta = Math.random() * 2.0;
-var target = 2.1;
-var reset = false;
+var intensity = 1.0;
+var lastkeydown = 0;
+
+document.addEventListener("keydown", function(event) {
+    lastkeydown = event.key;
+});
+
+document.addEventListener("keyup", function(event) {
+    lastkeydown = event.key == lastkeydown ? "" : lastkeydown;
+});
 
 function onrender() {
-    delta += 0.016;
+    if (this.lastkeydown == "ArrowRight") {
+        this.delta += 0.016;
+    } else if (this.lastkeydown == "ArrowLeft") {
+        this.delta -= 0.016;
+    }
+
+    if (this.lastkeydown == "ArrowUp") {
+        this.intensity += 0.016;
+    } else if (this.lastkeydown == "ArrowDown") {
+        this.intensity -= 0.016;
+    }
 
     gl.viewport(0, 0, canvas.width, canvas.height); // definimos o viewport do site
     gl.clearColor(0.0, 0.0, 0.0, 1.0);              // definimos a cor do background
     gl.clear(gl.COLOR_BUFFER_BIT);                  // limpamos os buffers passados da tela
+    gl.enable(gl.BLEND);
+    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
     pipelineprogram.invoke(); // habilitamos o programa do pipeline
-    pipelineprogram.setuniformfloat("uDelta", delta); // atualizamos o uniform buffer com o valor continuo delta.
+    pipelineprogram.setuniformfloat("uDelta", this.delta); // atualizamos o uniform buffer com o valor continuo this.delta.
+    pipelineprogram.setuniformfloat("uIntensity", this.intensity);
 
     quad.invoke(); // ligamos o buffer q queremos renderizar
     quad.draw(); // draw call
