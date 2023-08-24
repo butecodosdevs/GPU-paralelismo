@@ -76,7 +76,7 @@ cmake --build ./cmake-build-debug
 ![Microarquiteturas de fornecedores: NVIDIA, AMD e Intel](8/8-.md)
 - Um pouco sobre as microarquiteturas e suas técnologias.
 - Como diferentes fornecedores criam extensões para as APIs.
-- Incompatibilidades em engines.
+- Incompatibilidades de shaders.
 
 ---
 
