@@ -1,14 +1,14 @@
 # GPU-paralelismo
 The aulas of gatinhos ao mesmo tempo
 
-![Foi escrito uma demo em C++ que implementa uma simulação de um tecido-malha 3D em OpenGL](demo/),  
-em uma janela do ![SDL2](https://www.libsdl.org/).  
+[Foi escrito uma demo em C++ que implementa uma simulação de um tecido-malha 3D em OpenGL](demo/),  
+em uma janela do [SDL2](https://www.libsdl.org/).  
 
 O compilador usado foi o GCC, no Windows [MinGW-64w](https://www.mingw-w64.org/downloads/).  
 É necessário baixar o [CMake](https://cmake.org/download/).
 
-A biblioteca usada para obter as funções de extensão novas do OpenGL 4 é o ![GLEW](https://glew.sourceforge.net/).  
-A biblioteca de matemática usada para fazer operações matemática de álgebra linear é o ![GLM](https://github.com/g-truc/glm).
+A biblioteca usada para obter as funções de extensão novas do OpenGL 4 é o [GLEW](https://glew.sourceforge.net/).  
+A biblioteca de matemática usada para fazer operações matemática de álgebra linear é o [GLM](https://github.com/g-truc/glm).
 
 No caso do Windows, foi disponibilizado as bibliotecas nativas prontas para serem copiadas  
 no caminho de bibliotecas do toolchain (compilador).  As DLLs das biblioteca são 64.
@@ -50,30 +50,30 @@ cmake --build ./cmake-build-debug
 
 ----
 
-![Sumario](sumario/sumario.md) 
+[Sumario](sumario/sumario.md) 
 
-![Apresentação e introdução](1/1-.md) 
+[Apresentação e introdução](1/1-.md) 
 - Resumo sobre a GPU e a sua importância de um modo geral.
 
-![Qual a base de conhecimento e a preparação necessária para iniciar nessa área](2/2-.md)  
+[Qual a base de conhecimento e a preparação necessária para iniciar nessa área](2/2-.md)  
 - Informação sobre o conhecimento necessário para prosseguir com essa carreira.
 
-![Quais os diferentes campos e sua situação no mercado exterior](3/3-.md)  
+[Quais os diferentes campos e sua situação no mercado exterior](3/3-.md)  
 - Situação no mercado atual e como é o trabalho.  
 
-![Situação do Brasil e o campo graphics programming](4/4-.md)  
+[Situação do Brasil e o campo graphics programming](4/4-.md)
 - Situação no cenário Brasileiro e uma crítica.
 
-![Resumo sobre central processor unit (CPU) e graphics processor unit (GPU), e sua implementação via software](6/6-.md)  
+[Resumo sobre central processor unit (CPU) e graphics processor unit (GPU), e sua implementação via software](6/6-.md)  
 - Um funcionamento geral dos microprocessadores e uma analise mais profunda sobre o funcionamento no caso das GPUs.
 - Analise sobre as APIs de propósito gerais, aprofundamento sobre a filosofia das APIs modernas e suas diferenças com as legadas (OpenGL, DirectX 11).
 
-![Diferenças entre APIs, detalhes e processo do pipeline gráfico.](7/7-.md)
+[Diferenças entre APIs, detalhes e processo do pipeline gráfico.](7/7-.md)
 - Uma analise mais profunda sobre as filosofias do Vulkan e OpenGL.
 - O que é um buffer? sobre o termo buffer comumente usado em várias APIs.
 - Processo de fetch de shader e detalhes sobre a execução das shaders.
 
-![Microarquiteturas de fornecedores: NVIDIA, AMD e Intel](8/8-.md)
+[Microarquiteturas de fornecedores: NVIDIA, AMD e Intel](8/8-.md)
 - Um pouco sobre as microarquiteturas e suas técnologias.
 - Como diferentes fornecedores criam extensões para as APIs.
 - Incompatibilidades de shaders.
