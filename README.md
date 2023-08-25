@@ -94,6 +94,7 @@ OpenGL na Nvidia: https://on-demand.gputechconf.com/siggraph/2016/presentation/s
 Livro citado: https://www.realtimerendering.com/  
 Site interessante: https://iquilezles.org/articles/  
 Especificações do i3 8100: https://www.intel.com.br/content/www/br/pt/products/sku/126688/intel-core-i38100-processor-6m-cache-3-60-ghz/specifications.html  
+Intel ARC microarquitetura: https://www.intel.com.br/content/www/br/pt/products/docs/discrete-gpus/arc/technology/xe-hpg-microarchitecture.html  
 NVIDIA Ada Lovelace (citei um texto): https://www.nvidia.com/pt-br/geforce/ada-lovelace-architecture/  
 Preview da RX 480: https://www.anandtech.com/show/10446/the-amd-radeon-rx-480-preview/3  
 Stream processing: https://pt.wikipedia.org/wiki/Stream_processing  
