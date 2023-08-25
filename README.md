@@ -50,8 +50,6 @@ cmake --build ./cmake-build-debug
 
 ----
 
-[Sumario](sumario/sumario.md) 
-
 [Apresentação e introdução](1/1-.md) 
 - Resumo sobre a GPU e a sua importância de um modo geral.
 
