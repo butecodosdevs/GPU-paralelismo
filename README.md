@@ -72,7 +72,12 @@ cmake --build ./cmake-build-debug
 - Uma analise mais profunda sobre as filosofias do Vulkan e OpenGL.
 - O que é um buffer? sobre o termo buffer comumente usado em várias APIs.
 - Processo de fetch de shader e detalhes sobre a execução das shaders.
-  
+
+![Microarquiteturas de fornecedores: NVIDIA, AMD e Intel](8/8-.md)
+- Um pouco sobre as microarquiteturas e suas técnologias.
+- Como diferentes fornecedores criam extensões para as APIs.
+- Incompatibilidades de shaders.
+
 ---
 
 # Agradecimentos, créditos e refêrencias.
@@ -93,7 +98,7 @@ NVIDIA Ada Lovelace (citei um texto): https://www.nvidia.com/pt-br/geforce/ada-l
 Preview da RX 480: https://www.anandtech.com/show/10446/the-amd-radeon-rx-480-preview/3  
 Stream processing: https://pt.wikipedia.org/wiki/Stream_processing  
 CPU pipeline: https://pt.wikipedia.org/wiki/Pipeline_(hardware)  
-SIMD: https://en.wikipedia.org/wiki/Single_instruction,_multiple_data 
+SIMD: https://en.wikipedia.org/wiki/Single_instruction,_multiple_data  
 Pipeline de instruções: https://en.wikipedia.org/wiki/Instruction_pipelining   
 
 🐈💕
