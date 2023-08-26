@@ -11,6 +11,7 @@ uniform mat4 uMatrixModel;
 
 void main() {
     gl_Position = uMatrixProjection * vec4(aPos, 1.0f);
+
     vPos = (uMatrixModel * vec4(aPos, 1.0f)).xyz;
     vNormal = aNormal;
 }

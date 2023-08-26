@@ -1,6 +1,14 @@
 #include "graphics_pipeline_program.hpp"
 #include <fstream>
 
+chorume::graphics_pipeline_program::graphics_pipeline_program() {
+    this->program = glCreateProgram();
+}
+
+chorume::graphics_pipeline_program::~graphics_pipeline_program() {
+    glDeleteProgram(this->program);
+}
+
 void chorume::graphics_pipeline_program::set_uniform_mat4(std::string_view uniform_name, const float *p_value) {
     glUniformMatrix4fv(glGetUniformLocation(this->program, uniform_name.data()), 1, GL_FALSE, p_value);
 }
@@ -29,8 +37,6 @@ chorume::result chorume::read_file_as_string(std::string_view path, std::string 
 
 chorume::result chorume::create_graphics_pipeline_program(chorume::graphics_pipeline_program *p_pipeline_program,
                                                           const std::vector<chorume::graphics_shading_source> &shaders) {
-    p_pipeline_program->program = glCreateProgram(); // Cria um programa.
-
     chorume::result issue {chorume::result::ok};
     std::vector<uint32_t> jit_compiled_shader_list {};
     std::string shader_source {};

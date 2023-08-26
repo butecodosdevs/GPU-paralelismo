@@ -1,6 +1,7 @@
 
 #include "graphics/graphics_pipeline_program.hpp"
 #include "graphics/graphics_immediate_shape.hpp"
+#include "graphics/graphics_compute_shader.hpp"
 #include "math/linear_algebra.hpp"
 #include "scene/world_object_cloth.hpp"
 #include <glm/gtc/matrix_transform.hpp>
@@ -9,7 +10,7 @@
 // so liga se vc habilitar ENABLE_GUI do CMakeLists
 // e tiver a GUI instalada, pagina de download:
 // https://github.com/vokegpu/ekg-ui-library
-#define GUI_MODE_EKG
+// #define GUI_MODE_EKG
 #if defined(GUI_MODE_EKG)
 #include "ekg/ekg.hpp"
 #endif
@@ -81,6 +82,10 @@ int32_t update64(chorume::world_object_cloth *p_world_obj_coth) {
     return 0;
 }
 
+int32_t do_gpgpu() {
+    return 0;
+}
+
 int32_t main(int32_t, char**) {
     chorume::log() << "Preparando o contexto do OpenGL.";
 
@@ -120,6 +125,35 @@ int32_t main(int32_t, char**) {
         {"./data/world.object.glsl.vert", GL_VERTEX_SHADER},
         {"./data/world.object.glsl.frag", GL_FRAGMENT_SHADER}
     });
+
+    chorume::graphics_pipeline_program gpgpu_pipeline {};
+    chorume::create_graphics_pipeline_program(&gpgpu_pipeline, {{"./data/gpgpu.glsl.comp", GL_COMPUTE_SHADER}});
+
+    chorume::graphics_compute_shader compute_shader {};
+    compute_shader.p_compute_graphics_program = &gpgpu_pipeline.program;
+
+    chorume::sampler sampler_properties {
+        .primitive       = GL_FLOAT,
+        .w               = 1,
+        .h               = 1,
+        .format          = GL_RGBA32F,
+        .channel         = GL_RGBA,
+        .p_data          = nullptr
+    };
+
+    compute_shader.invoke();
+    compute_shader.bind_sampler(0);
+    compute_shader.set_sampler_propierties<float>(sampler_properties);
+    compute_shader.attach(0, 0, GL_WRITE_ONLY);
+
+    compute_shader.dispatch();
+    compute_shader.revoke();
+
+    std::vector<float> data {};
+    compute_shader.write_back<float>(0, data, 4);
+    for (float f : data) {
+        chorume::log() << "gpgpu: " << f;
+    }
 
     chorume::graphics_immediate_shape immediate_shape {};
     immediate_shape.set_pipeline_program(p_overlay_program->program);
@@ -197,11 +231,13 @@ int32_t main(int32_t, char**) {
         glViewport(0, 0, chorume::application.extent.w, chorume::application.extent.h);
 
         // Render pass de renderização.
-        glClearColor(0.213423894f * 0.0f, 0.235423894f * 0.0f, 0.234243894f * 0.0f, 1.0f);
+        glClearColor(0.213423894f, 0.235423894f, 0.234243894f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+        // Enquanto é usado um programa que renderiza apenas 2D.
         immediate_shape.invoke();
-        immediate_shape.draw({(float) chorume::application.extent.w - effect_bar_size, 0.0f, effect_bar_size, (float) chorume::application.extent.h}, {0.0f, 0.034234324f, 0.9894543f, 1.0f});
+
+        // É possivel renderizar apenas em 2D usando matrizes.
         immediate_shape.revoke();
 
         glUseProgram(p_world_object_program->program);
@@ -217,7 +253,7 @@ int32_t main(int32_t, char**) {
         p_world_object_program->set_uniform_mat4("uMatrixModel", &p_world_obj_coth->mat_model_trs[0][0]);
         p_world_object_program->set_uniform_vec3("uLightPos", &glm::vec3(20.0f, 5.0f, 0.0f)[0]);
         p_world_object_program->set_uniform_vec3("uMaterialColor", &glm::vec3(1.0f, 1.0f, 1.0f)[0]);
-        p_world_obj_coth->draw();
+        p_world_obj_coth->draw(); // draw call 3
 
         #if defined(GUI_MODE_EKG)
         glDisable(GL_DEPTH_TEST);
