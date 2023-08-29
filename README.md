@@ -1,6 +1,12 @@
 # GPU-paralelismo
 The aulas of gatinhos ao mesmo tempo
 
+Primeira aula:  
+não gravou 🐈‍⬛🐮
+
+Última aula:  
+https://www.youtube.com/watch?v=TI9cmXJWuag
+
 [Foi escrito uma demo em C++ que implementa uma simulação de um tecido-malha 3D em OpenGL](demo/),  
 em uma janela do [SDL2](https://www.libsdl.org/).  
 
