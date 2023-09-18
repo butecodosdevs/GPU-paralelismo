@@ -104,15 +104,15 @@ var pipelineprogram = new vokeprogram([
 
     void main() {
         float i  = uIntensity;
-        float f  = (noise(vec2(length((rand(vec2(tan(0.0002), 6766.0))) / fract(uDelta * 0.2) - tan(cos((gl_FragCoord.yx * 2.0) * fract(0.020))) * fract(0.09 * uDelta)))));
-        float f2 = (noise(vec2(length((rand(vec2(tan(0.0002), 6766.0))) / sin(uDelta * 0.002) / cos(uDelta * 0.002) - sin(tan((gl_FragCoord.yx) * fract(0.020))) * sin(0.09 * uDelta)))));
+        float f  = (noise(vec2(length((rand(vec2(uDelta, 6766.0))) / fract(uDelta * 0.2) - tan(cos((gl_FragCoord.yx * 2.0) * fract(0.020))) * fract(0.09 * uDelta)))));
+        float f2 = (noise(vec2(length((rand(vec2(uDelta * 0.0023, 766.0))) / cos(uDelta * 0.002) / sin(uDelta * 0.002) - cos(tan((gl_FragCoord.yx) * fract(0.020))) * sin(0.09 * uDelta)))));
 
         gl_FragColor = vec4(f2, f, f2, f2);
         //gl_FragColor = (vec4(fract(f), rand(vec2((rand(vec2(666.0, sin(2.0)))))) / f, 10.0, 1.0));
         gl_FragColor = mix(gl_FragColor, vec4(rand(vec2(222.0, 666.02)) / f2 / 0.26 * i, f - ((0.333666 * i) / uDelta), f2 / (666.0 * i) * uDelta, f), length(gl_FragColor.x / f / f2 / cos(uDelta * 0.2)));
         gl_FragColor = mix(gl_FragColor, vec4(f2 - f, f2 / f, f2 * f, 1.0), length(f * f2 / cos(uDelta * 0.2)));
 
-        f = (noise(vec2(length((rand(vec2(sin(0.0002), 6766.0))) / tan(uDelta * 0.2 * i) - fract(sin((gl_FragCoord.yx) * fract(0.020 * i))) * fract(0.09 * uDelta)))));
+        f = (noise(vec2(length((rand(vec2(uDelta * 0.002, uIntensity))) / tan(uDelta * 0.2 * i) - fract(sin((gl_FragCoord.yx) * fract(0.020 * i))) * fract(0.09 * uDelta)))));
         gl_FragColor = (vec4(fract(f), rand(vec2((rand(vec2(666.0, sin(2.0)))))) / f, 10.0, 1.0));
         gl_FragColor = mix(gl_FragColor, vec4(rand(vec2(f, 100.0*100.0 / tan(2.0))) / f * 0.343, f - 0.32, gl_FragCoord.y / 21312.0, f), length(gl_FragColor.x / f * cos(uDelta * 0.2)));
         gl_FragColor.w = 1.0;
