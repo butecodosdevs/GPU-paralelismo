@@ -46,7 +46,7 @@ void chorume::graphics_immediate_shape::set_pipeline_program(uint32_t _pipeline_
         // Primeiro alocamos um espaço dentro da VRAM da GPU.
         glBufferData(GL_ARRAY_BUFFER, sizeof(resources), nullptr, GL_STATIC_DRAW);
         
-        // Agoramos damos "fill", preenchendo o espaço vazio com os dados 
+        // Agora damos "fill", preenchendo o espaço vazio com os dados 
         // que queremos enviar.
 
         // Stride é um conceito de memória, muito usado nas APIs.
