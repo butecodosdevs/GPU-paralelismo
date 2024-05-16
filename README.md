@@ -48,7 +48,7 @@ cmake --build ./cmake-build-debug
 ```
 
 Em consideração foi escrito um site em cima do webgl que renderiza efeitos procedurais pela GPU. Use as teclas (left, right, up, down) para modificiar o efeito na tela.  
-https://chorumedev.github.io/GPU-paralelismo/
+https://butecodosdevs.github.io/GPU-paralelismo/
 
 `./index.html` HTML do site.  
 `./website/` Scripts do site.  
